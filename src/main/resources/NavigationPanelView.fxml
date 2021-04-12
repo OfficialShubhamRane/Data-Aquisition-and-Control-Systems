@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NavigationPanelController">
+   <children>
+      <Label layoutX="14.0" layoutY="29.0" text="Machine Details: " underline="true" />
+      <Label layoutX="13.0" layoutY="165.0" text="Operator Details: " underline="true" />
+      <Pane focusTraversable="true" layoutX="13.0" layoutY="219.0" prefHeight="204.0" prefWidth="244.0">
+         <children>
+            <BorderPane layoutX="27.0" layoutY="14.0" prefHeight="137.0" prefWidth="191.0">
+               <top>
+                  <Button fx:id="forwardBtn_ID" mnemonicParsing="false" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Forward" BorderPane.alignment="CENTER" />
+               </top>
+               <left>
+                  <Button mnemonicParsing="false" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Left" BorderPane.alignment="CENTER" />
+               </left>
+               <center>
+                  <Button mnemonicParsing="false" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Stop" BorderPane.alignment="CENTER" />
+               </center>
+               <bottom>
+                  <Button mnemonicParsing="false" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Back" BorderPane.alignment="CENTER" />
+               </bottom>
+               <right>
+                  <Button mnemonicParsing="false" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Right" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+         </children>
+      </Pane>
+      <Separator layoutX="268.0" layoutY="23.0" orientation="VERTICAL" prefHeight="388.0" prefWidth="0.0" />
+      <Separator layoutX="275.0" layoutY="349.0" prefHeight="3.0" prefWidth="324.0" />
+      <Button fx:id="captureImageBtn_ID" layoutX="451.0" layoutY="365.0" mnemonicParsing="false" onAction="#captureImageBtnClicked" prefHeight="32.0" prefWidth="139.0" text="Capture" />
+      <Separator layoutX="603.0" layoutY="23.0" orientation="VERTICAL" prefHeight="388.0" prefWidth="0.0" />
+      <Label layoutX="623.0" layoutY="38.0" text="Log Details" underline="true" />
+      <TextArea fx:id="systemLogTA_ID" editable="false" layoutX="623.0" layoutY="71.0" prefHeight="315.0" prefWidth="200.0" promptText="System Log will be printed here." />
+      <Separator layoutX="8.0" layoutY="215.0" prefHeight="1.0" prefWidth="254.0" />
+      <Separator layoutX="1.0" layoutY="21.0" prefHeight="3.0" prefWidth="834.0" />
+      <Label layoutX="13.0" layoutY="188.0" text="Name: " />
+      <Label layoutX="8.0" layoutY="56.0" text="Machine ID: " />
+      <Label layoutX="97.0" layoutY="56.0" text="Machine_1.1" />
+      <TextField fx:id="opName_ID" editable="false" layoutX="59.0" layoutY="184.0" />
+      <Label layoutX="7.0" layoutY="82.0" text="Battery Life: " />
+      <TextField fx:id="batteryLife_ID" editable="false" layoutX="99.0" layoutY="78.0" prefHeight="26.0" prefWidth="74.0" />
+      <Label layoutX="7.0" layoutY="112.0" text="Total Distace Travelled:" />
+      <TextField fx:id="distaceCovered_ID" editable="false" layoutX="144.0" layoutY="108.0" prefHeight="26.0" prefWidth="76.0" />
+      <Label layoutX="226.0" layoutY="121.0" text="meter" />
+      <Button  layoutX="750.0" layoutY="31.0" mnemonicParsing="false" onAction="#backtrackBtnClicked" text="Backtrack" />
+      <Text layoutX="734.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Shubham Rane" />
+      <ImageView fx:id="imageView_ID" fitHeight="307.0" fitWidth="324.0" layoutX="274.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
