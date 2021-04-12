@@ -24,6 +24,7 @@ public class Main extends Application {
 
 
         Parent LoginView = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("LoginView.fxml")));
+        /** Backdoor for testing */
 //        Parent LoginView = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("NavigationPanelView.fxml")));
         Scene LoginViewScene = new Scene(LoginView);
         primaryStage.setResizable(true);
