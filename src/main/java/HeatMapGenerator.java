@@ -84,7 +84,7 @@ public class HeatMapGenerator {
         heatChartObj.setXAxisLabel("Right - Left Movement");
         heatChartObj.setYAxisLabel("Forward - Reverse Movement");
 
-        heatChartObj.saveToFile(new File("src/CaptureImages/navigation-heatChart.png"));
+        heatChartObj.saveToFile(new File(Constants.save_heatMapDirectory));
     }
 
 

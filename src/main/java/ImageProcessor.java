@@ -30,7 +30,7 @@ public class ImageProcessor {
 
         CascadeClassifier cascadeClassifier = new CascadeClassifier();
         int minFaceSize = Math.round(capturedMat.rows() * 0.1f);
-        cascadeClassifier.load("src/main/resources/haarcascade_frontalface_alt.xml");
+        cascadeClassifier.load(Constants.frontalFaceCascadeDirectory);
         cascadeClassifier.detectMultiScale(capturedMat,
                 facesDetected,
                 1.1,
@@ -45,7 +45,7 @@ public class ImageProcessor {
             Imgproc.rectangle(capturedMat, face.tl(), face.br(), new Scalar(0, 0, 255), 3);
         }
         if(isCaptureClicked){
-            writeFaceDetectedImg(capturedMat, "src/CaptureImages/faceDetected_img");
+            writeFaceDetectedImg(capturedMat, Constants.save_capturedPhotoDirectory);
         }
         return capturedMat;
     }
