@@ -10,6 +10,7 @@ public class LoginDAO {
         Statement stmt = con.createStatement();
         String getSql = "SELECT password from neon.user WHERE user_id=? ";
         PreparedStatement prpdStmt = con.prepareStatement(getSql);
+
         prpdStmt.setString(1,username);
         ResultSet rs = prpdStmt.executeQuery();
         rs.next();

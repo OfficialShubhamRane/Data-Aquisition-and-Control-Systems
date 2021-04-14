@@ -33,6 +33,7 @@
       <TextField fx:id="userIDTf_ID" alignment="CENTER" layoutX="623.0" layoutY="128.0" promptText="User ID" />
       <Label layoutX="529.0" layoutY="180.0" text="Password : " />
       <PasswordField fx:id="passwordTf_ID" alignment="CENTER" layoutX="620.0" layoutY="178.0" promptText="Password" />
+      <Label fx:id="invalidUserLb_ID" focusTraversable="false" layoutX="583.0" layoutY="248.0" text="Invalid Credentials" visible="false" />
       <Button layoutX="565.0" layoutY="306.0" mnemonicParsing="false" onAction="#loginBtnClicked" prefHeight="32.0" prefWidth="146.0" text="Login" />
       <Text layoutX="732.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Shubham Rane" />
    </children>

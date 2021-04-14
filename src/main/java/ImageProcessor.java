@@ -11,6 +11,7 @@ import java.io.InputStream;
 public class ImageProcessor {
 
     /** Simple reading and writting image from specified path - Testing*/
+    /**
     public Mat readImg(){
         Imgcodecs.imread("src/main/resources/img1.jpg");
         System.out.println("Read successful");
@@ -21,9 +22,9 @@ public class ImageProcessor {
         Imgcodecs.imwrite("src/main/resources/img2.jpg", readImg());
         System.out.println("Written Successfully");
     }
+    **/
 
-    /** Detecting faces from specifies image
-     * @return*/
+    /** Detecting faces from specifies image */
     public static Mat detectFaceFromImages(Mat capturedMat, boolean isCaptureClicked){
 
         MatOfRect facesDetected = new MatOfRect();
