@@ -22,9 +22,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
 
 
-        Parent LoginView = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("LoginView.fxml")));
+//        Parent LoginView = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("LoginView.fxml")));
         /** Backdoor for testing */
-//        Parent LoginView = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("NavigationPanelView.fxml")));
+        Parent LoginView = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("NavigationPanelView.fxml")));
         Scene LoginViewScene = new Scene(LoginView);
         primaryStage.setResizable(true);
         primaryStage.setScene(LoginViewScene);

@@ -99,6 +99,8 @@ public class NavigationPanelController {
                 backTrackingLog.append("Reverse : ").append(keyPressLength / 1000).append(" sec ");
                 backTrackingLog.append(keyPressLength % 1000).append(" millisec");
 
+
+
                 direction = "Forward";
                 distance = keyPressLength/1000;
 
