@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
@@ -25,7 +26,6 @@ public class NavigationPanelController {
     public Button captureImageBtn_ID;
     public TextField batteryLife_ID;
     public TextField distaceCovered_ID;
-    public Button forwardBtn_ID;
     public ImageView imageView_ID;
 
 
@@ -74,7 +74,7 @@ public class NavigationPanelController {
 
     /** System time - time when key was released */
     StringBuilder backTrackingLog = new StringBuilder();
-    public void arrowKeyReleaseHandler(KeyEvent keyEvent) throws IOException, InvocationException {
+    public void arrowKeyReleaseHandler(KeyEvent keyEvent) throws IOException {
 
         KeyCode releasedKey = keyEvent.getCode();
         if (currKey == releasedKey) {
@@ -104,13 +104,14 @@ public class NavigationPanelController {
                 direction = "Forward";
                 distance = keyPressLength/1000;
 
+
             }else{
                 systemLogTA_ID.appendText("Forward : " + keyPressLength%1000 + " millisec");
                 backTrackingLog.append("Reverse : ").append(keyPressLength % 1000).append(" millisec");
             }
             systemLogTA_ID.appendText("\n");
             backTrackingLog.append("\n");
-
+            keyPressLength = 0;
         }
         else if (currKey == KeyCode.A){
             if(keyPressLength/1000 > 0){
@@ -132,7 +133,7 @@ public class NavigationPanelController {
             systemLogTA_ID.appendText("\n");
             backTrackingLog.append("\n");
             totalDistanceTravelled();
-
+            keyPressLength = 0;
         }
         else if(currKey == KeyCode.S){
             if(keyPressLength/1000 > 0){
@@ -155,6 +156,7 @@ public class NavigationPanelController {
             systemLogTA_ID.appendText("\n");
             backTrackingLog.append("\n");
             totalDistanceTravelled();
+            keyPressLength = 0;
         }
         else if(currKey == KeyCode.D){
             if(keyPressLength/1000 > 0){
@@ -176,7 +178,7 @@ public class NavigationPanelController {
             }
             systemLogTA_ID.appendText("\n");
             backTrackingLog.append("\n");
-
+            keyPressLength = 0;
         }
         else if(currKey == KeyCode.SPACE){
             systemLogTA_ID.appendText("Brake");

@@ -2,40 +2,42 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 /** This class is tend to generate logs of each session of system use with great details **/
 public class SessionDocGenerator {
 
+    /** Object for date format **/
+
+
+    static LocalDate myObj = LocalDate.now(); // Create a date object
+
     /** Creating file and declaring writter for it**/
-    static File sessionFile = new File(Constants.save_sessionLogsDirectory);
+    static File sessionFile = new File( Constants.save_sessionLogsDirectory.concat( myObj.toString() ).concat(".txt") );
     static FileWriter writer;
     static {
         try {
-            writer = new FileWriter(Constants.save_sessionLogsDirectory);
+            writer = new FileWriter( Constants.save_sessionLogsDirectory.concat( myObj.toString() ).concat(".txt") );
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /** Object for date format **/
-    static SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-    static Date date = new Date();
-
     public static void main(String[] args) throws IOException {
-        /** Called logger multiple times to check if it is appending successfully or not**/
-        logWritter();
-        logWritter();
+
+        System.out.println( Constants.save_sessionLogsDirectory.concat( myObj.toString() ) );
         logWritter();
         writer.close();
     }
 
-    /** Log writter append system logs with date and time **/
+    /** Log writer append system logs with date and time **/
     public static void logWritter() throws IOException {
-        if (sessionFile.exists()) {
-            writer.append(simpleDateFormatter.format(date)).append(" \n");
+        if (sessionFile.createNewFile()) {
+            System.out.println("Now i can write in file");
+            writer.append(" add content to be appended here ");
         } else {
-            System.out.println("File does not exist.");
+            System.out.println("File does not exist or already exists");
         }
     }
 

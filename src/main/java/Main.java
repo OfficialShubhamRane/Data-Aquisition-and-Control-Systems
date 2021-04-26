@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.opencv.core.Core;
 
@@ -22,13 +23,19 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
 
 
-//        Parent LoginView = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("LoginView.fxml")));
+        Parent LoginView = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("LoginView.fxml")));
         /** Backdoor for testing */
-        Parent LoginView = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("NavigationPanelView.fxml")));
+//        Parent LoginView = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("NavigationPanelView.fxml")));
+
+        Image icon = new Image("icon.png");
+
         Scene LoginViewScene = new Scene(LoginView);
-        primaryStage.setResizable(true);
         primaryStage.setScene(LoginViewScene);
-        primaryStage.setTitle("Navigation&Surveillance Controller");
+        primaryStage.setTitle("Login");
+        primaryStage.getIcons().add(icon);
+        primaryStage.setHeight(450);
+        primaryStage.setWidth(845);
+        primaryStage.setResizable(false);
         primaryStage.show();
 
 

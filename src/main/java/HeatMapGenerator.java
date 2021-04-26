@@ -10,18 +10,18 @@ import java.io.IOException;
  * **/
 public class HeatMapGenerator {
 
-    /** Creating 21by21 heatChart for visualizing vehicle movements*/
-    private static final double[][] heatChartData = new double[21][21];
+    /** Creating heatChart for visualizing vehicle movements */
+    private static final double[][] heatChartData = new double[41][41];
     /** Start point is 11,11 index */
-    private static final double i = 11;
-    private static final double j = 11;
+    private static final double i = heatChartData.length / 2.0;
+    private static final double j = i;
 
     /** Keeping destination coordinates same as start while initializing*/
     private static double desti_i = i;
     private static double desti_j = j;
 
     /** heatChart data generation */
-    public static void heatChartGenerator(String direction, long distance) {
+    public static void heatChartGenerator(String direction, long distance) throws NullPointerException {
 
         double ori_i = desti_i;
         double ori_j = desti_j;

@@ -8,7 +8,7 @@ public class LoginDAO {
 
         Connection con = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD);
         Statement stmt = con.createStatement();
-        String getSql = "SELECT password from neon.user WHERE user_id=? ";
+        String getSql = "SELECT password from java_projects_schema.uvc_login WHERE user_id=? ";
         PreparedStatement prpdStmt = con.prepareStatement(getSql);
 
         prpdStmt.setString(1,username);
