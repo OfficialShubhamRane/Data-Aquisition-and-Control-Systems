@@ -1,45 +1,23 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
+
+
 
 /** This class is tend to generate logs of each session of system use with great details **/
 public class SessionDocGenerator {
 
-    /** Object for date format **/
+    /** Create file in suitable format to store meta-data and logs of machine */
 
+    /** Name file with "System Time + MachineID" or any suitable key*/
 
-    static LocalDate myObj = LocalDate.now(); // Create a date object
+    /** Decide what things should be stored in file eg.-
+     * Operator name
+     * Machine ID
+     * Battery start and end status
+     * System Logs
+     * Images and HeatChart if possible
+     * Future scope:    Location (latitude-longitude)
+     *                  Weather conditions
+     *                  etc */
 
-    /** Creating file and declaring writter for it**/
-    static File sessionFile = new File( Constants.save_sessionLogsDirectory.concat( myObj.toString() ).concat(".txt") );
-    static FileWriter writer;
-    static {
-        try {
-            writer = new FileWriter( Constants.save_sessionLogsDirectory.concat( myObj.toString() ).concat(".txt") );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) throws IOException {
-
-        System.out.println( Constants.save_sessionLogsDirectory.concat( myObj.toString() ) );
-        logWritter();
-        writer.close();
-    }
-
-    /** Log writer append system logs with date and time **/
-    public static void logWritter() throws IOException {
-        if (sessionFile.createNewFile()) {
-            System.out.println("Now i can write in file");
-            writer.append(" add content to be appended here ");
-        } else {
-            System.out.println("File does not exist or already exists");
-        }
-    }
-
-
+    /** Persist file somewhere on local machine */
+    
 }

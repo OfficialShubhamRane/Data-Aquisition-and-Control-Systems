@@ -29,11 +29,7 @@ public class LoginController {
 
     @FXML
     private TextField userIDTf_ID;
-
     public boolean isValidUser;
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
     @FXML
     void loginBtnClicked(ActionEvent event) throws SQLException, IOException {
@@ -43,16 +39,15 @@ public class LoginController {
 
         /** Validates user from database **/
         isValidUser = LoginDAO.authenticateUser(userIDTf_ID.getText(),passwordTf_ID.getText());
-
         if(isValidUser){
 
-            root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("NavigationPanelView.fxml"))));
-            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("NavigationPanelView.fxml"))));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setHeight(450);
+            stage.setHeight(575);
             stage.setWidth(845);
-            stage.setTitle("Data Acquisition and Controls Panel");
+            stage.setTitle("Data Acquisition and Controls");
             stage.setResizable(false);
             stage.show();
 

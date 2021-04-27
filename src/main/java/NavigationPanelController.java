@@ -25,11 +25,12 @@ public class NavigationPanelController {
     public TextField opName_ID;
     public Button captureImageBtn_ID;
     public TextField batteryLife_ID;
-    public TextField distaceCovered_ID;
+    public TextField distanceCovered_ID;
     public ImageView imageView_ID;
 
 
     public void initialize(){
+
         /** Sets operator name fetching from user_ID field from login */
         opName_ID.setText(LoginController.operatorName);
 
@@ -76,6 +77,11 @@ public class NavigationPanelController {
     StringBuilder backTrackingLog = new StringBuilder();
     public void arrowKeyReleaseHandler(KeyEvent keyEvent) throws IOException {
 
+        /** Values initializers for heatmap */
+        String direction = null;
+        long distance = 0;
+
+        /** Ches which key was released to map its released system time*/
         KeyCode releasedKey = keyEvent.getCode();
         if (currKey == releasedKey) {
             keyPressLength = System.currentTimeMillis() - keyPressedMillis;
@@ -83,42 +89,31 @@ public class NavigationPanelController {
             lastKey = null;
         }
 
-        /** Values for heatmap */
-        String direction = null;
-        long distance = 0;
-
         /** Controls and SystemLogging on TextArea */
         if (currKey == KeyCode.W) {
 
-            if(keyPressLength/1000 > 0){
+            if(keyPressLength / 1000 > 0){
                 systemLogTA_ID.appendText("Forward : " + keyPressLength/1000 + " sec ");
-                systemLogTA_ID.appendText(keyPressLength%1000 + " millisec");
+                systemLogTA_ID.appendText(keyPressLength % 1000 + " millisec");
                 timeTravelled += keyPressLength;
-                totalDistanceTravelled();
 
                 backTrackingLog.append("Reverse : ").append(keyPressLength / 1000).append(" sec ");
                 backTrackingLog.append(keyPressLength % 1000).append(" millisec");
 
-
-
                 direction = "Forward";
                 distance = keyPressLength/1000;
-
 
             }else{
                 systemLogTA_ID.appendText("Forward : " + keyPressLength%1000 + " millisec");
                 backTrackingLog.append("Reverse : ").append(keyPressLength % 1000).append(" millisec");
             }
-            systemLogTA_ID.appendText("\n");
-            backTrackingLog.append("\n");
-            keyPressLength = 0;
+
         }
         else if (currKey == KeyCode.A){
             if(keyPressLength/1000 > 0){
                 systemLogTA_ID.appendText("Left        : " + keyPressLength/1000 + " sec ");
                 systemLogTA_ID.appendText(keyPressLength%1000 + " millisec");
                 timeTravelled += keyPressLength;
-                totalDistanceTravelled();
 
                 backTrackingLog.append("Right      : ").append(keyPressLength / 1000).append(" sec ");
                 backTrackingLog.append(keyPressLength % 1000).append(" millisec");
@@ -130,17 +125,13 @@ public class NavigationPanelController {
                 systemLogTA_ID.appendText("Left        : " + keyPressLength%1000 + " millisec");
                 backTrackingLog.append("Right      : ").append(keyPressLength % 1000).append(" millisec");
             }
-            systemLogTA_ID.appendText("\n");
-            backTrackingLog.append("\n");
-            totalDistanceTravelled();
-            keyPressLength = 0;
+
         }
         else if(currKey == KeyCode.S){
             if(keyPressLength/1000 > 0){
                 systemLogTA_ID.appendText("Reverse : " + keyPressLength/1000 + " sec ");
                 systemLogTA_ID.appendText(keyPressLength%1000 + " millisec");
                 timeTravelled += keyPressLength;
-                totalDistanceTravelled();
 
                 backTrackingLog.append("Forward : ").append(keyPressLength / 1000).append(" sec ");
                 backTrackingLog.append(keyPressLength % 1000).append(" millisec");
@@ -153,17 +144,13 @@ public class NavigationPanelController {
                 systemLogTA_ID.appendText("Reverse : " + keyPressLength%1000 + " millisec");
                 backTrackingLog.append("Forward : ").append(keyPressLength % 1000).append(" millisec");
             }
-            systemLogTA_ID.appendText("\n");
-            backTrackingLog.append("\n");
-            totalDistanceTravelled();
-            keyPressLength = 0;
+
         }
         else if(currKey == KeyCode.D){
             if(keyPressLength/1000 > 0){
                 systemLogTA_ID.appendText("Right     : " + keyPressLength/1000 + " sec ");
                 systemLogTA_ID.appendText(keyPressLength%1000 + " millisec");
                 timeTravelled += keyPressLength;
-                totalDistanceTravelled();
 
                 backTrackingLog.append("Left       : ").append(keyPressLength / 1000).append(" sec ");
                 backTrackingLog.append(keyPressLength % 1000).append(" millisec");
@@ -171,14 +158,11 @@ public class NavigationPanelController {
                 direction = "Right";
                 distance = keyPressLength/1000;
 
-
             }else{
                 systemLogTA_ID.appendText("Right     : " + keyPressLength%1000 + " millisec");
                 backTrackingLog.append("Left       : ").append(keyPressLength % 1000).append(" millisec");
             }
-            systemLogTA_ID.appendText("\n");
-            backTrackingLog.append("\n");
-            keyPressLength = 0;
+
         }
         else if(currKey == KeyCode.SPACE){
             systemLogTA_ID.appendText("Brake");
@@ -188,7 +172,15 @@ public class NavigationPanelController {
             backTrackingLog.append("\n");
         }
 
-        /** Sending data tto heatMapGenerator class after each key release*/
+        /** Resets and pushes each log on next line in systemLogs textfield*/
+        systemLogTA_ID.appendText("\n");
+        backTrackingLog.append("\n");
+        keyPressLength = 0;
+
+        /** Call method to calculate total distance covered w.r.t. seconds key was pressed*/
+        totalDistanceTravelled();
+
+        /** Sending data to heatMapGenerator class after each key release*/
         assert direction != null;
         HeatMapGenerator.heatChartGenerator(direction, distance);
         HeatMapGenerator.heatMapGeneration();
@@ -201,10 +193,12 @@ public class NavigationPanelController {
     /** Total distance travelled */
     float timeTravelled = 0;
     float coveredDistance = 0;
+    double vehicleSpeed = 5.0; // 50 miles per hour
     public void totalDistanceTravelled(){
         System.out.println(timeTravelled);
-        coveredDistance = (float) ((5.0 / 360.0) * timeTravelled);
-        distaceCovered_ID.setText(String.valueOf(coveredDistance));
+        coveredDistance = (float) ((vehicleSpeed / 360.0) * timeTravelled);
+        distanceCovered_ID.setText(String.valueOf(coveredDistance));
+        System.out.println( String.valueOf(coveredDistance ));
     }
 
     /** Backtrack logs */

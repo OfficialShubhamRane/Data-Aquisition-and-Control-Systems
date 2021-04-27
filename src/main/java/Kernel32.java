@@ -5,6 +5,7 @@ import com.sun.jna.Native;
 import com.sun.jna.Structure;
 import com.sun.jna.win32.StdCallLibrary;
 
+/** This is an external code used to get battery life status from laptop kernel */
 public interface Kernel32 extends StdCallLibrary {
 
     public Kernel32 INSTANCE = Native.load("Kernel32", Kernel32.class);
