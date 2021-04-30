@@ -83,8 +83,6 @@ public class HeatMapGenerator {
         HeatChart heatChartObj = new HeatChart(heatChartData);
 
         heatChartObj.setTitle("Machine_1.1 Movement HeatMap");
-        heatChartObj.setXAxisLabel("Right - Left Movement");
-        heatChartObj.setYAxisLabel("Forward - Reverse Movement");
 
         heatChartObj.saveToFile(new File(Constants.save_heatMapDirectory));
     }
