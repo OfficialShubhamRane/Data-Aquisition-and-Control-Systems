@@ -54,6 +54,7 @@ public class ImageProcessor {
     /** Writing face detected image on specified path */
     static int pictureId = 1;
     public static void writeFaceDetectedImg(Mat srcImage, String targetImagePath) {
+        System.out.println("Entered to write images");
         Imgcodecs.imwrite(targetImagePath + pictureId +".jpg", srcImage);
 
         pictureId++;

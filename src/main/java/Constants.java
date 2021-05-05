@@ -7,5 +7,8 @@ public class Constants {
     public static String frontalFaceCascadeDirectory = "src/main/resources/haarcascade_frontalface_alt.xml";
     public static String save_heatMapDirectory = "src/SessionData/navigation-heatChart.png";
     public static String save_capturedPhotoDirectory = "src/SessionData/faceDetected_img";
-    public static String save_sessionLogsDirectory = "src/SessionData/";
+
+    public static String heatMapImage = "src/SessionData/navigation-heatChart.png";
+    public static String googleMapsImage = "src/main/resources/GoogleMaps.png";
+    public static String blendedHeatMap = "src/SessionData/blendedNavHeatChart.png";
 }
