@@ -2,7 +2,6 @@
 /** Author: Shubham Rane www.linkedin.com/in/shubham-rane97 **/
 
 import com.github.sarxos.webcam.Webcam;
-import com.sun.jdi.InvocationException;
 import javafx.animation.AnimationTimer;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -10,14 +9,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 
 public class NavigationPanelController {
@@ -30,7 +27,6 @@ public class NavigationPanelController {
     public TextField latitude_ID;
     public TextField longitude_ID;
     public ImageView imageView_ID;
-
 
 
     public void initialize() throws IOException {
@@ -57,8 +53,8 @@ public class NavigationPanelController {
      * */
     KeyCode currKey;
     KeyCode lastKey = null;
-    long keyPressedMillis = 0;
-    long keyPressLength = 0;
+    long keyPressedSystemTime = 0;
+    long keyHeldDuration = 0;
 
     /** Time when key was pressed */
     public void arrowKeyStrokesHandler(KeyEvent keyEvent) {
@@ -66,19 +62,19 @@ public class NavigationPanelController {
         if(currKey != lastKey){
             lastKey = currKey;
             if(currKey == KeyCode.W){ //UP
-                keyPressedMillis = System.currentTimeMillis();
+                keyPressedSystemTime = System.currentTimeMillis();
             }
             else if(currKey == KeyCode.D){ //RIGHT
-                keyPressedMillis = System.currentTimeMillis();
+                keyPressedSystemTime = System.currentTimeMillis();
             }
             else if(currKey == KeyCode.A){ //LEFT
-                keyPressedMillis = System.currentTimeMillis();
+                keyPressedSystemTime = System.currentTimeMillis();
             }
             else if(currKey == KeyCode.S){ //DOWN/BACK
-                keyPressedMillis = System.currentTimeMillis();
+                keyPressedSystemTime = System.currentTimeMillis();
             }
             else if(currKey == KeyCode.SPACE){ // Stop/Space
-                keyPressedMillis = System.currentTimeMillis();
+                keyPressedSystemTime = System.currentTimeMillis();
             }
         }
     }
@@ -91,86 +87,86 @@ public class NavigationPanelController {
         String direction = null;
         long distance = 0;
 
-        /** Ches which key was released to map its released system time*/
+        /** Checks which key was released to map its released system time*/
         KeyCode releasedKey = keyEvent.getCode();
         if (currKey == releasedKey) {
-            keyPressLength = System.currentTimeMillis() - keyPressedMillis;
-            keyPressedMillis = 0;
+            keyHeldDuration = System.currentTimeMillis() - keyPressedSystemTime;
+            keyPressedSystemTime = 0;
             lastKey = null;
         }
 
         /** Controls and SystemLogging on TextArea */
         if (currKey == KeyCode.W) {
 
-            if(keyPressLength / 1000 > 0){
-                systemLogTA_ID.appendText("Forward : " + keyPressLength/1000 + " sec ");
-                systemLogTA_ID.appendText(keyPressLength % 1000 + " millisec");
-                timeTravelled += keyPressLength;
+            if(keyHeldDuration / 1000 > 0){
+                systemLogTA_ID.appendText("Forward : " + keyHeldDuration /1000 + " sec ");
+                systemLogTA_ID.appendText(keyHeldDuration % 1000 + " millisec");
+                timeTravelled += keyHeldDuration;
 
-                backTrackingLog.append("Reverse : ").append(keyPressLength / 1000).append(" sec ");
-                backTrackingLog.append(keyPressLength % 1000).append(" millisec");
+                backTrackingLog.append("Reverse : ").append(keyHeldDuration / 1000).append(" sec ");
+                backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
 
                 direction = "Forward";
-                distance = keyPressLength/1000;
+                distance = keyHeldDuration /1000;
 
             }else{
-                systemLogTA_ID.appendText("Forward : " + keyPressLength%1000 + " millisec");
-                backTrackingLog.append("Reverse : ").append(keyPressLength % 1000).append(" millisec");
+                systemLogTA_ID.appendText("Forward : " + keyHeldDuration %1000 + " millisec");
+                backTrackingLog.append("Reverse : ").append(keyHeldDuration % 1000).append(" millisec");
             }
 
         }
         else if (currKey == KeyCode.A){
-            if(keyPressLength/1000 > 0){
-                systemLogTA_ID.appendText("Left        : " + keyPressLength/1000 + " sec ");
-                systemLogTA_ID.appendText(keyPressLength%1000 + " millisec");
-                timeTravelled += keyPressLength;
+            if(keyHeldDuration /1000 > 0){
+                systemLogTA_ID.appendText("Left        : " + keyHeldDuration /1000 + " sec ");
+                systemLogTA_ID.appendText(keyHeldDuration %1000 + " millisec");
+                timeTravelled += keyHeldDuration;
 
-                backTrackingLog.append("Right      : ").append(keyPressLength / 1000).append(" sec ");
-                backTrackingLog.append(keyPressLength % 1000).append(" millisec");
+                backTrackingLog.append("Right      : ").append(keyHeldDuration / 1000).append(" sec ");
+                backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
 
                 direction = "Left";
-                distance = keyPressLength/1000;
+                distance = keyHeldDuration /1000;
 
             }else{
-                systemLogTA_ID.appendText("Left        : " + keyPressLength%1000 + " millisec");
-                backTrackingLog.append("Right      : ").append(keyPressLength % 1000).append(" millisec");
+                systemLogTA_ID.appendText("Left        : " + keyHeldDuration %1000 + " millisec");
+                backTrackingLog.append("Right      : ").append(keyHeldDuration % 1000).append(" millisec");
             }
 
         }
         else if(currKey == KeyCode.S){
-            if(keyPressLength/1000 > 0){
-                systemLogTA_ID.appendText("Reverse : " + keyPressLength/1000 + " sec ");
-                systemLogTA_ID.appendText(keyPressLength%1000 + " millisec");
-                timeTravelled += keyPressLength;
+            if(keyHeldDuration /1000 > 0){
+                systemLogTA_ID.appendText("Reverse : " + keyHeldDuration /1000 + " sec ");
+                systemLogTA_ID.appendText(keyHeldDuration %1000 + " millisec");
+                timeTravelled += keyHeldDuration;
 
-                backTrackingLog.append("Forward : ").append(keyPressLength / 1000).append(" sec ");
-                backTrackingLog.append(keyPressLength % 1000).append(" millisec");
+                backTrackingLog.append("Forward : ").append(keyHeldDuration / 1000).append(" sec ");
+                backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
 
 
                 direction = "Reverse";
-                distance = keyPressLength/1000;
+                distance = keyHeldDuration /1000;
 
             }else{
-                systemLogTA_ID.appendText("Reverse : " + keyPressLength%1000 + " millisec");
-                backTrackingLog.append("Forward : ").append(keyPressLength % 1000).append(" millisec");
+                systemLogTA_ID.appendText("Reverse : " + keyHeldDuration %1000 + " millisec");
+                backTrackingLog.append("Forward : ").append(keyHeldDuration % 1000).append(" millisec");
             }
 
         }
         else if(currKey == KeyCode.D){
-            if(keyPressLength/1000 > 0){
-                systemLogTA_ID.appendText("Right     : " + keyPressLength/1000 + " sec ");
-                systemLogTA_ID.appendText(keyPressLength%1000 + " millisec");
-                timeTravelled += keyPressLength;
+            if(keyHeldDuration /1000 > 0){
+                systemLogTA_ID.appendText("Right     : " + keyHeldDuration /1000 + " sec ");
+                systemLogTA_ID.appendText(keyHeldDuration %1000 + " millisec");
+                timeTravelled += keyHeldDuration;
 
-                backTrackingLog.append("Left       : ").append(keyPressLength / 1000).append(" sec ");
-                backTrackingLog.append(keyPressLength % 1000).append(" millisec");
+                backTrackingLog.append("Left       : ").append(keyHeldDuration / 1000).append(" sec ");
+                backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
 
                 direction = "Right";
-                distance = keyPressLength/1000;
+                distance = keyHeldDuration /1000;
 
             }else{
-                systemLogTA_ID.appendText("Right     : " + keyPressLength%1000 + " millisec");
-                backTrackingLog.append("Left       : ").append(keyPressLength % 1000).append(" millisec");
+                systemLogTA_ID.appendText("Right     : " + keyHeldDuration %1000 + " millisec");
+                backTrackingLog.append("Left       : ").append(keyHeldDuration % 1000).append(" millisec");
             }
 
         }
@@ -185,7 +181,7 @@ public class NavigationPanelController {
         /** Resets and pushes each log on next line in systemLogs textfield*/
         systemLogTA_ID.appendText("\n");
         backTrackingLog.append("\n");
-        keyPressLength = 0;
+        keyHeldDuration = 0;
 
         /** Call method to calculate total distance covered w.r.t. seconds key was pressed*/
         totalDistanceTravelled();
@@ -209,9 +205,10 @@ public class NavigationPanelController {
     double vehicleSpeed = 5.0; // 50 miles per hour
     public void totalDistanceTravelled(){
         System.out.println(timeTravelled);
-        coveredDistance = (float) ((vehicleSpeed / 360.0) * timeTravelled);
+
+        coveredDistance = (float) ( (vehicleSpeed / 360.0) * timeTravelled);
         distanceCovered_ID.setText(String.valueOf(coveredDistance));
-        System.out.println( String.valueOf(coveredDistance ));
+        System.out.println( coveredDistance );
     }
 
     /** Backtrack logs */
