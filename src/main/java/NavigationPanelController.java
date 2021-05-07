@@ -17,6 +17,7 @@ import org.opencv.videoio.VideoCapture;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.IOException;
+import java.net.UnknownHostException;
 
 
 public class NavigationPanelController {
@@ -26,10 +27,13 @@ public class NavigationPanelController {
     public Button captureImageBtn_ID;
     public TextField batteryLife_ID;
     public TextField distanceCovered_ID;
+    public TextField latitude_ID;
+    public TextField longitude_ID;
     public ImageView imageView_ID;
 
 
-    public void initialize(){
+
+    public void initialize() throws IOException {
 
         /** Sets operator name fetching from user_ID field from login */
         opName_ID.setText(LoginController.operatorName);
@@ -39,7 +43,13 @@ public class NavigationPanelController {
         Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
         batteryLife_ID.setText(batteryStatus.toString());
 
+        /** Turn on Video Cam*/
         turnOnVideoCam();
+
+        /** Sets Latitude and Longitude */
+        latitude_ID.setText( LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() ) );
+        longitude_ID.setText( LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() ) );
+
     }
 
     /**

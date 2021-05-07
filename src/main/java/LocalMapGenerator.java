@@ -3,60 +3,52 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 
+/** This class is responsible for fetching latitude and logitude of machine using public IP of the machine */
 public class LocalMapGenerator {
 
-    public static void main(String[] args) throws IOException {
-        locationGenerator( ip_Finder() );
+    /** Retrives public IP address of mahchine */
+    public static String publicIP_Finder() {
 
+        String public_IP;
+        try
+        {
+            URL url_name = new URL("http://bot.whatismyipaddress.com");
+            BufferedReader sc = new BufferedReader(new InputStreamReader( url_name.openStream() ) );
+            public_IP = sc.readLine().trim();
+        }
+        catch (Exception e)
+        {
+            public_IP = "Cannot Execute Properly";
+        }
+        return public_IP;
     }
 
-    private static void locationGenerator( String public_ip) throws IOException {
-        URL urlForLatitude = new URL("https://ipapi.co/"+ public_ip + "/latitude/"); // 108.5.129.48 -----------  192.168.1.49
-        URL urlForLongitude = new URL("https://ipapi.co/"+ public_ip + "/longitude/");
-
-        System.out.println( "Latittude :" + jsonValueRetreiver(urlForLatitude) );
-        System.out.println( "Logitude :" + jsonValueRetreiver(urlForLongitude) );
+    /** Fetches Latitude of the machine */
+    public static String latitudeGetter( String public_IP ) throws IOException {
+        URL urlForLatitude = new URL("https://ipapi.co/"+ public_IP + "/latitude/");
+        return jsonValueRetreiver(urlForLatitude);
     }
 
-    static String jsonValueRetreiver(URL ipapi) throws IOException {
+    /** Fetches Logitude of the machine */
+    public static String longitudeGetter( String public_IP ) throws IOException {
+        URL urlForLongitude = new URL("https://ipapi.co/"+ public_IP + "/longitude/");
+        return jsonValueRetreiver(urlForLongitude);
+    }
 
-        URLConnection c = ipapi.openConnection();
-        c.setRequestProperty("User-Agent", "java-ipapi-client");
+    /** Retrives the json value from the URL */
+    static String jsonValueRetreiver(URL urlName) throws IOException {
+        BufferedReader reader = new BufferedReader( new InputStreamReader( urlName.openStream() ) );
 
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(c.getInputStream())
-        );
-
-        String line = reader.readLine();
-        System.out.println("log: " + line);
+        String line = null;
+        while ( reader.ready() ){
+            line = reader.readLine().trim();
+        }
         reader.close();
-
         return line;
 
     }
 
-    /** Retrives public IP address of mahchine */
-    private static String ip_Finder() throws UnknownHostException {
 
-        // Find public IP address
-        String system_IP = null;
-        try
-        {
-            URL url_name = new URL("http://bot.whatismyipaddress.com");
-
-            BufferedReader sc = new BufferedReader(new InputStreamReader(url_name.openStream()));
-
-            // reads system IPAddress
-            system_IP = sc.readLine().trim();
-        }
-        catch (Exception e)
-        {
-            system_IP = "Cannot Execute Properly";
-        }
-        System.out.println("Public IP Address: " + system_IP +"\n");
-        return system_IP;
-
-    }
 
 
 }
