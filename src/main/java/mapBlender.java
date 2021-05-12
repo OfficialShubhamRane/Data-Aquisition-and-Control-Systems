@@ -2,11 +2,10 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
-import java.awt.*;
+public class mapBlender {
 
-public class ImageBlender {
-
-    public void run() {
+    /** Combines heatmap with Local map */
+    public void combineHeatmapWithGoogleMap() {
         double alpha = 0.3; double beta = 0.5;
 
         /** Three matrixes which will be used */

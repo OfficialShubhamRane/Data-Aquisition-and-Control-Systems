@@ -2,12 +2,13 @@
 
 import java.sql.*;
 
+/** Responsible to interact with database to authenticate user credentials */
 public class LoginDAO {
 
+    /** Authenticates user */
     public static boolean authenticateUser(String username, String password) throws SQLException {
 
         Connection con = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD);
-        Statement stmt = con.createStatement();
         String getSql = "SELECT password from java_projects_schema.uvc_login WHERE user_id=? ";
         PreparedStatement prpdStmt = con.prepareStatement(getSql);
 
@@ -17,4 +18,5 @@ public class LoginDAO {
 
         return password.equals(rs.getString("password"));
     }
+
 }

@@ -192,7 +192,7 @@ public class NavigationPanelController {
         HeatMapGenerator.heatMapGeneration();
 
         /** Responsible for creating blended heatChart with maps*/
-        new ImageBlender().run();
+        new mapBlender().combineHeatmapWithGoogleMap();
 
         /** Periodically check for battery status after each key release*/
         batteryStatusChecker();

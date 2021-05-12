@@ -36,7 +36,7 @@ public class LocalMapGenerator {
     }
 
     /** Retrives the json value from the URL */
-    static String jsonValueRetreiver(URL urlName) throws IOException {
+    private static String jsonValueRetreiver(URL urlName) throws IOException {
         BufferedReader reader = new BufferedReader( new InputStreamReader( urlName.openStream() ) );
 
         String line = null;
