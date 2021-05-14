@@ -6,7 +6,7 @@ import java.net.*;
 /** This class is responsible for fetching latitude and logitude of machine using public IP of the machine */
 public class LocalMapGenerator {
 
-    /** Retrives public IP address of mahchine */
+    /** Retrieves public IP address of machine */
     public static String publicIP_Finder() {
 
         String public_IP;
@@ -26,17 +26,17 @@ public class LocalMapGenerator {
     /** Fetches Latitude of the machine */
     public static String latitudeGetter( String public_IP ) throws IOException {
         URL urlForLatitude = new URL("https://ipapi.co/"+ public_IP + "/latitude/");
-        return jsonValueRetreiver(urlForLatitude);
+        return jsonValueRetriever(urlForLatitude);
     }
 
-    /** Fetches Logitude of the machine */
+    /** Fetches Longitude of the machine */
     public static String longitudeGetter( String public_IP ) throws IOException {
         URL urlForLongitude = new URL("https://ipapi.co/"+ public_IP + "/longitude/");
-        return jsonValueRetreiver(urlForLongitude);
+        return jsonValueRetriever(urlForLongitude);
     }
 
-    /** Retrives the json value from the URL */
-    private static String jsonValueRetreiver(URL urlName) throws IOException {
+    /** Retrieves the json value from the URL */
+    private static String jsonValueRetriever(URL urlName) throws IOException {
         BufferedReader reader = new BufferedReader( new InputStreamReader( urlName.openStream() ) );
 
         String line = null;
