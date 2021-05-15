@@ -57,6 +57,8 @@ public class LocalMapGenerator {
                 "&exclude=daily,minutely,hourly" +
                 "&appid=" + Constants.weatherAPI_key);
 
+        System.out.println(urlForWeather);
+
 
         String weatherJson = weatherJsonValueRetriever(urlForWeather);
         String mainWeather = dominantWeatherFinder( weatherJson );
@@ -80,6 +82,8 @@ public class LocalMapGenerator {
 
         int indexOfMain =  weatherJson.lastIndexOf("id");
         String weatherID = weatherJson.substring(indexOfMain+4, indexOfMain+7);
+
+        System.out.println(weatherID);
 
         Map<String, String> weatherMap = new HashMap<>();
         weatherMap.put("200","Thunderstorm with light rain");

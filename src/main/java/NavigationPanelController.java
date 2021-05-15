@@ -40,18 +40,45 @@ public class NavigationPanelController {
         Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
         batteryLife_ID.setText(batteryStatus.toString());
 
-        /** Turn on Video Cam*/
-        turnOnVideoCam();
+        /** Turn on Video Cam */
+        try{
+
+            turnOnVideoCam();
+
+        }catch (Exception e){
+            System.out.println("Camera Failed to Start");
+            e.printStackTrace();
+        }
 
         /** Sets Latitude and Longitude */
-        String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
-        String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
-        latitude_ID.setText( latitude );
-        longitude_ID.setText( longitude );
+        try{
 
-        /** Call Weather api for weather data */
-        String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
-        weatherRtf_ID.setText( currentWeather );
+            String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
+            String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
+
+            latitude_ID.setText( latitude );
+            longitude_ID.setText( longitude );
+
+        }catch (Exception e){
+            System.out.println("Couldn't get Lat and Longitude data");
+            e.printStackTrace();
+        }
+
+        /** Get weather data */
+        try{
+
+            /** Gets Latitude and Longitude */
+            String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
+            String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
+
+            /** Call Weather api for weather data */
+            String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
+            weatherRtf_ID.setText( currentWeather );
+
+        }catch(Exception e){
+            System.out.println("Couldn't get weather data");
+            e.printStackTrace();
+        }
 
     }
 
