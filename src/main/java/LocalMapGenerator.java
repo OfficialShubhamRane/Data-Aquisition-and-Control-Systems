@@ -5,7 +5,7 @@ import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 
-/** This class is responsible for fetching latitude and logitude of machine using public IP of the machine */
+/** This class is responsible for fetching latitude and longitude of machine using public IP of the machine */
 public class LocalMapGenerator {
 
     /** Retrieves public IP address of machine */
@@ -57,7 +57,7 @@ public class LocalMapGenerator {
                 "&exclude=daily,minutely,hourly" +
                 "&appid=" + Constants.weatherAPI_key);
 
-        System.out.println(urlForWeather);
+        System.out.println("Weather URL: " + urlForWeather);
 
 
         String weatherJson = weatherJsonValueRetriever(urlForWeather);
@@ -83,7 +83,7 @@ public class LocalMapGenerator {
         int indexOfMain =  weatherJson.lastIndexOf("id");
         String weatherID = weatherJson.substring(indexOfMain+4, indexOfMain+7);
 
-        System.out.println(weatherID);
+        System.out.println("Weather ID:" + weatherID);
 
         Map<String, String> weatherMap = new HashMap<>();
         weatherMap.put("200","Thunderstorm with light rain");

@@ -29,7 +29,7 @@ public class NavigationPanelController {
     public ImageView imageView_ID;
     public TextField weatherRtf_ID;
 
-
+    /** Initialize Value */
     public void initialize() throws IOException {
 
         /** Sets operator name fetching from user_ID field from login */
@@ -50,7 +50,7 @@ public class NavigationPanelController {
             e.printStackTrace();
         }
 
-        /** Sets Latitude and Longitude */
+        /** Set Latitude and Longitude */
         try{
 
             String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
@@ -60,6 +60,8 @@ public class NavigationPanelController {
             longitude_ID.setText( longitude );
 
         }catch (Exception e){
+            latitude_ID.setText("N/A");
+            longitude_ID.setText("N/A");
             System.out.println("Couldn't get Lat and Longitude data");
             e.printStackTrace();
         }
@@ -76,6 +78,7 @@ public class NavigationPanelController {
             weatherRtf_ID.setText( currentWeather );
 
         }catch(Exception e){
+            weatherRtf_ID.setText("N/A");
             System.out.println("Couldn't get weather data");
             e.printStackTrace();
         }
@@ -291,4 +294,5 @@ public class NavigationPanelController {
         }.start();
 
     }
+
 }
