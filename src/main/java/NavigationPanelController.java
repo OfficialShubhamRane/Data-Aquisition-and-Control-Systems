@@ -27,6 +27,7 @@ public class NavigationPanelController {
     public TextField latitude_ID;
     public TextField longitude_ID;
     public ImageView imageView_ID;
+    public TextField weatherRtf_ID;
 
 
     public void initialize() throws IOException {
@@ -43,8 +44,14 @@ public class NavigationPanelController {
         turnOnVideoCam();
 
         /** Sets Latitude and Longitude */
-        latitude_ID.setText( LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() ) );
-        longitude_ID.setText( LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() ) );
+        String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
+        String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
+        latitude_ID.setText( latitude );
+        longitude_ID.setText( longitude );
+
+        /** Call Weather api for weather data */
+        String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
+        weatherRtf_ID.setText( currentWeather );
 
     }
 

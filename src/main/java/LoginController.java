@@ -33,8 +33,6 @@ public class LoginController {
 
     @FXML
     void loginBtnClicked(ActionEvent event) throws SQLException, IOException {
-        System.out.println("User_ID: " + userIDTf_ID.getText());
-        System.out.println("Password: " + passwordTf_ID.getText());
         operatorName = userIDTf_ID.getText();
 
         /** Validates user from database **/
