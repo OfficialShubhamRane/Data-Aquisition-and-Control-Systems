@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class Constants {
 
@@ -15,6 +14,6 @@ public class Constants {
     public static String googleMapsImage = "src/main/resources/GoogleMaps.png";
     public static String blendedHeatMap = "src/SessionData/blendedNavHeatChart.png";
 
-    final public static String weatherAPI_key = "4a35f0f50ffdfc2aaa5966bbcec3f638";
+    final public static String weatherAPI_key = "4a3b5f0f50ffdfc2aaa5966bbcec3f638";
 
 }
