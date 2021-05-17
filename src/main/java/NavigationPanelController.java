@@ -138,7 +138,7 @@ public class NavigationPanelController {
             if(keyHeldDuration / 1000 > 0){
                 systemLogTA_ID.appendText("Forward : " + keyHeldDuration /1000 + " sec ");
                 systemLogTA_ID.appendText(keyHeldDuration % 1000 + " millisec");
-                timeTravelled += keyHeldDuration;
+                secondsTravelled += keyHeldDuration;
 
                 backTrackingLog.append("Reverse : ").append(keyHeldDuration / 1000).append(" sec ");
                 backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
@@ -156,7 +156,7 @@ public class NavigationPanelController {
             if(keyHeldDuration /1000 > 0){
                 systemLogTA_ID.appendText("Left        : " + keyHeldDuration /1000 + " sec ");
                 systemLogTA_ID.appendText(keyHeldDuration %1000 + " millisec");
-                timeTravelled += keyHeldDuration;
+                secondsTravelled += keyHeldDuration;
 
                 backTrackingLog.append("Right      : ").append(keyHeldDuration / 1000).append(" sec ");
                 backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
@@ -174,7 +174,7 @@ public class NavigationPanelController {
             if(keyHeldDuration /1000 > 0){
                 systemLogTA_ID.appendText("Reverse : " + keyHeldDuration /1000 + " sec ");
                 systemLogTA_ID.appendText(keyHeldDuration %1000 + " millisec");
-                timeTravelled += keyHeldDuration;
+                secondsTravelled += keyHeldDuration;
 
                 backTrackingLog.append("Forward : ").append(keyHeldDuration / 1000).append(" sec ");
                 backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
@@ -193,7 +193,7 @@ public class NavigationPanelController {
             if(keyHeldDuration /1000 > 0){
                 systemLogTA_ID.appendText("Right     : " + keyHeldDuration /1000 + " sec ");
                 systemLogTA_ID.appendText(keyHeldDuration %1000 + " millisec");
-                timeTravelled += keyHeldDuration;
+                secondsTravelled += keyHeldDuration;
 
                 backTrackingLog.append("Left       : ").append(keyHeldDuration / 1000).append(" sec ");
                 backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
@@ -229,7 +229,7 @@ public class NavigationPanelController {
         HeatMapGenerator.heatMapGeneration();
 
         /** Responsible for creating blended heatChart with maps*/
-        new mapBlender().combineHeatmapWithGoogleMap();
+        new MapBlender().combineHeatmapWithGoogleMap();
 
         /** Periodically check for battery status after each key release*/
         batteryStatusChecker();
@@ -237,15 +237,15 @@ public class NavigationPanelController {
     }
 
     /** Total distance travelled */
-    float timeTravelled = 0;
-    float coveredDistance = 0;
+    float secondsTravelled = 0;
+    float movedDistance = 0;
     double vehicleSpeed = 5.0; // 50 miles per hour
     public void totalDistanceTravelled(){
-        System.out.println(timeTravelled);
+        System.out.println(secondsTravelled);
 
-        coveredDistance = (float) ( (vehicleSpeed / 360.0) * timeTravelled);
-        distanceCovered_ID.setText(String.valueOf(coveredDistance));
-        System.out.println( coveredDistance );
+        movedDistance = (float) ( (vehicleSpeed / 360.0) * secondsTravelled);
+        distanceCovered_ID.setText(String.valueOf(movedDistance));
+        System.out.println(movedDistance);
     }
 
     /** Backtrack logs */

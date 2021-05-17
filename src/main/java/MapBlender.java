@@ -2,10 +2,12 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
-public class mapBlender {
+import java.io.IOException;
+
+public class MapBlender {
 
     /** Combines heatmap with Local map */
-    public void combineHeatmapWithGoogleMap() {
+    public void combineHeatmapWithGoogleMap() throws IOException {
         double alpha = 0.3; double beta = 0.5;
 
         /** Three matrixes which will be used */
@@ -13,7 +15,9 @@ public class mapBlender {
 
         /** 2 source images which are to be added, NEED TO BE OF SAME SIZES */
         src1 = Imgcodecs.imread(Constants.heatMapImage);        // value of alpha
-        src2 = Imgcodecs.imread(Constants.googleMapsImage);     // value of Beta
+//        src2 = Imgcodecs.imread(Constants.googleMapsImage);     // value of Beta
+        GoogleMapGenerator.googleMapImageGetter();
+        src2 = Imgcodecs.imread(Constants.TEST_googleMapsImage);     // value of Beta
 
         /** This method generates result image in dsk matrix */
         Core.addWeighted( src1, alpha, src2, beta, 0.0, dst);

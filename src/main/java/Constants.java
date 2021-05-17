@@ -12,8 +12,10 @@ public class Constants {
 
     public static String heatMapImage = "src/SessionData/navigation-heatChart.png";
     public static String googleMapsImage = "src/main/resources/GoogleMaps.png";
+    public static String TEST_googleMapsImage = "src/main/resources/TEST_GoogleMaps.png";
     public static String blendedHeatMap = "src/SessionData/blendedNavHeatChart.png";
 
-    final public static String weatherAPI_key = "4a3b5f0f50ffdfc2aaa5966bbcec3f638";
-
+    final public static String weatherAPI_key = "4a35f0f50ffdfc2aaa5966bbcec3f638";
+    final public static String googleMapAPI_key = "AIzaSyDwFYHpPzpWqrWIZa5R-KL3QYlQQTmSKqs";
+    // My perfect co-ordinates are: 40.75028544,-74.04422841
 }

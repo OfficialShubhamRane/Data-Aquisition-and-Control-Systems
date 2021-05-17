@@ -59,7 +59,6 @@ public class LocalMapGenerator {
 
         System.out.println("Weather URL: " + urlForWeather);
 
-
         String weatherJson = weatherJsonValueRetriever(urlForWeather);
         String mainWeather = dominantWeatherFinder( weatherJson );
         return mainWeather;
@@ -151,6 +150,5 @@ public class LocalMapGenerator {
         return weatherMap.get(weatherID);
 
     }
-
 
 }
