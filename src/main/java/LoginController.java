@@ -37,7 +37,7 @@ public class LoginController {
     NotificationsGenerator notificationObject;
 
     public void initialize(){
-        notificationObject = new NotificationsGenerator();
+         notificationObject = new NotificationsGenerator();
     }
 
     @FXML
@@ -45,11 +45,14 @@ public class LoginController {
         operatorName = userIDTf_ID.getText();
         String operatorPass = passwordTf_ID.getText();
 
+        LoginDAO loginDAOObj = new LoginDAO();
+
         /** Validates user from database **/
-        isValidUser = LoginDAO.authenticateUser(operatorName, operatorPass);
+        isValidUser = loginDAOObj.authenticateUser(operatorName, operatorPass);
 
         notificationObject.loginNotification(isValidUser);
 
+        /** If user is valid then load the next window */
         if(isValidUser){
 
             Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("NavigationPanelView.fxml"))));

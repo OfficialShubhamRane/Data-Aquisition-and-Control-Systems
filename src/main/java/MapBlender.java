@@ -13,15 +13,14 @@ public class MapBlender {
         /** Three matrixes which will be used */
         Mat src1, src2, dst = new Mat();
 
-        /** 2 source images which are to be added, NEED TO BE OF SAME SIZES */
+        /** 2 source images which are to be added, NEED TO BE OF SAME PIXEL SIZES */
         src1 = Imgcodecs.imread(Constants.heatMapImage);        // value of alpha
-//        src2 = Imgcodecs.imread(Constants.googleMapsImage);     // value of Beta
+
         GoogleMapGenerator.googleMapImageGetter();
-        src2 = Imgcodecs.imread(Constants.TEST_googleMapsImage);     // value of Beta
+        src2 = Imgcodecs.imread(Constants.googleMapsImage);     // value of Beta
 
-        /** This method generates result image in dsk matrix */
+        /** This method generates result image in dst matrix */
         Core.addWeighted( src1, alpha, src2, beta, 0.0, dst);
-
         Imgcodecs.imwrite(Constants.blendedHeatMap,dst);
 
     }
