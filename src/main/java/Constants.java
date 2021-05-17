@@ -15,8 +15,8 @@ public class Constants {
     public static String googleMapsImage = "src/main/resources/GoogleMaps.png";
     public static String blendedHeatMap = "src/SessionData/blendedNavHeatChart.png";
 
-    final public static String weatherAPI_key = "4a35f0f50ffdfc2aaa5966bbcec3f638";
-    final public static String googleMapAPI_key = "AIzaSyDwFYHpPzpWqrWIZa5R-KL3QYlQQTmSKqs";
+    final public static String weatherAPI_key = "4a3b5f0f50ffdfc2aaa5966bbcec3f638";
+    final public static String googleMapAPI_key = "AIzbaSyDwFYHpPzpWqrWIZa5R-KL3QYlQQTmSKqs";
     final public static String congressStreetHardCoded_Link = "https://maps.googleapis.com/maps/api/staticmap?center=40.75028544,-74.04422841&zoom=19&size=883x904&maptype=satellite&key=";
     // My perfect co-ordinates are: 40.75028544,-74.04422841
 }
