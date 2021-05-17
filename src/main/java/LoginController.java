@@ -3,6 +3,7 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -31,14 +34,25 @@ public class LoginController {
     private TextField userIDTf_ID;
     public boolean isValidUser;
 
+    NotificationsGenerator notificationObject;
+
+    public void initialize(){
+         notificationObject = new NotificationsGenerator();
+    }
+
     @FXML
     void loginBtnClicked(ActionEvent event) throws SQLException, IOException {
-        System.out.println("User_ID: " + userIDTf_ID.getText());
-        System.out.println("Password: " + passwordTf_ID.getText());
         operatorName = userIDTf_ID.getText();
+        String operatorPass = passwordTf_ID.getText();
+
+        LoginDAO loginDAOObj = new LoginDAO();
 
         /** Validates user from database **/
-        isValidUser = LoginDAO.authenticateUser(userIDTf_ID.getText(),passwordTf_ID.getText());
+        isValidUser = loginDAOObj.authenticateUser(operatorName, operatorPass);
+
+        notificationObject.loginNotification(isValidUser);
+
+        /** If user is valid then load the next window */
         if(isValidUser){
 
             Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("NavigationPanelView.fxml"))));
@@ -52,6 +66,7 @@ public class LoginController {
             stage.show();
 
         }else{
+
             invalidUserLb_ID.setVisible(true);
         }
 
