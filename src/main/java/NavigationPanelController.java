@@ -24,10 +24,9 @@ public class NavigationPanelController {
     public Button captureImageBtn_ID;
     public TextField batteryLife_ID;
     public TextField distanceCovered_ID;
-    public TextField latitude_ID;
-    public TextField longitude_ID;
     public ImageView imageView_ID;
     public TextField weatherRtf_ID;
+    public Button backTrack_btn;
 
     /** Initialize Value */
     public void initialize() throws IOException {
@@ -72,12 +71,12 @@ public class NavigationPanelController {
     /**
      * Calculating for How long key was pressed
      * */
-    KeyCode currKey;
-    KeyCode lastKey = null;
-    long keyPressedSystemTime = 0;
-    long keyHeldDuration = 0;
+    private KeyCode currKey;
+    private KeyCode lastKey = null;
+    private long keyPressedSystemTime = 0;
+    private long keyHeldDuration = 0;
 
-    /** Time when key was pressed */
+    /** System time when key was pressed */
     public void arrowKeyStrokesHandler(KeyEvent keyEvent) {
         currKey = keyEvent.getCode();
         if(currKey != lastKey){
@@ -100,13 +99,9 @@ public class NavigationPanelController {
         }
     }
 
-
-    /** System time - time when key was released */
-
+    /** System time when key was released */
     StringBuilder backTrackingLog = new StringBuilder();
     StringBuilder forwardTrackingLog = new StringBuilder();
-
-
     public void arrowKeyReleaseHandler(KeyEvent keyEvent) throws IOException {
 
         /** Values initializers for heatmap */
@@ -231,7 +226,7 @@ public class NavigationPanelController {
     float secondsTravelled = 0;
     float movedDistance = 0;
     double vehicleSpeed = 5.0; // 50 miles per hour
-    public void totalDistanceTravelled(){
+    private void totalDistanceTravelled(){
         System.out.println(secondsTravelled);
 
         movedDistance = (float) ( (vehicleSpeed / 360.0) * secondsTravelled);
@@ -239,21 +234,23 @@ public class NavigationPanelController {
         System.out.println(movedDistance);
     }
 
-    /** Backtrack logs */
+    /** Toggle between Track & Backtrack logs */
     boolean isBackTrackOn = false;
     public void backtrackBtnClicked() {
         if(!isBackTrackOn){
             isBackTrackOn = true;
+            backTrack_btn.setText("Track");
             systemLogTA_ID.setText(String.valueOf(backTrackingLog));
         }else{
             isBackTrackOn = false;
+            backTrack_btn.setText("Backtrack");
             systemLogTA_ID.setText(String.valueOf(forwardTrackingLog));
         }
 
     }
 
     /** Battery of laptop/vehicle displayed here */
-    public void batteryStatusChecker(){
+    private void batteryStatusChecker(){
         Kernel32.SYSTEM_POWER_STATUS batteryStatus = new Kernel32.SYSTEM_POWER_STATUS();
         Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
         batteryLife_ID.setText(batteryStatus.toString());
@@ -284,7 +281,7 @@ public class NavigationPanelController {
 
     /** Capture video from video cam **/
     static VideoCapture capture;
-    public void turnOnVideoCam() {
+    private void turnOnVideoCam() {
         capture = new VideoCapture(0);
 
         new AnimationTimer() {
