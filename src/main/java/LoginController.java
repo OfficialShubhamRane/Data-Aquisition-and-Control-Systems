@@ -23,7 +23,6 @@ import java.util.Objects;
 public class LoginController {
 
     @FXML
-    public AnchorPane rootPane;
     public static String operatorName;
     public Label invalidUserLb_ID;
 
@@ -37,11 +36,12 @@ public class LoginController {
     NotificationsGenerator notificationObject;
 
     public void initialize(){
-         notificationObject = new NotificationsGenerator();
+        invalidUserLb_ID.setVisible(false);
+        notificationObject = new NotificationsGenerator();
     }
 
     @FXML
-    void loginBtnClicked(ActionEvent event) throws SQLException, IOException {
+    void loginBtnClicked(ActionEvent event) throws SQLException, IOException, InterruptedException {
         operatorName = userIDTf_ID.getText();
         String operatorPass = passwordTf_ID.getText();
 
@@ -50,11 +50,11 @@ public class LoginController {
         /** Validates user from database **/
         isValidUser = loginDAOObj.authenticateUser(operatorName, operatorPass);
 
-        notificationObject.loginNotification(isValidUser);
+        /**  Notification  as a feedback for uesr authentification */
+//        notificationObject.loginNotification(isValidUser);
 
         /** If user is valid then load the next window */
         if(isValidUser){
-
             Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("NavigationPanelView.fxml"))));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
@@ -66,7 +66,6 @@ public class LoginController {
             stage.show();
 
         }else{
-
             invalidUserLb_ID.setVisible(true);
         }
 
