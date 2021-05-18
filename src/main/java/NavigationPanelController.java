@@ -133,7 +133,7 @@ public class NavigationPanelController {
         }
 
         /** Controls and SystemLogging on TextArea */
-        if (currKey == KeyCode.W) {
+        if (currKey == KeyCode.W ) {
 
             if(keyHeldDuration / 1000 > 0){
                 systemLogTA_ID.appendText("Forward : " + keyHeldDuration /1000 + " sec ");

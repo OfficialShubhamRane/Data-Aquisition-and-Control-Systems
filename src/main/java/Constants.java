@@ -22,7 +22,7 @@ public class Constants {
     // My perfect co-ordinates are: 40.75028544,-74.04422841
 
 
-
+    /** Holds weather ID  and weather Description mapping */
     final public static String getWeatherReport(String weatherID){
 
         Map<String, String> weatherMap = new HashMap<>();
