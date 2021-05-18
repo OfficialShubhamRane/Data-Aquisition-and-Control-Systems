@@ -19,7 +19,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NavigationPanelController">
    <Separator layoutX="1.0" layoutY="21.0" prefHeight="3.0" prefWidth="834.0" />
-   <VBox layoutX="14.0" layoutY="33.0" prefHeight="274.0" prefWidth="243.0">
+   <VBox layoutX="14.0" layoutY="33.0" prefHeight="219.0" prefWidth="243.0">
       <children>
          <Label text="Operator Details: " underline="true">
             <padding>
@@ -54,8 +54,6 @@
              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
            </rowConstraints>
             <children>
                <Label text="Machine ID: " />
@@ -64,17 +62,13 @@
                <TextField fx:id="batteryLife_ID" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="74.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                <Label text="Dist. / m:" GridPane.rowIndex="2" />
                <TextField fx:id="distanceCovered_ID" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="76.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Latitude:" GridPane.rowIndex="3" />
-               <TextField fx:id="latitude_ID" editable="false" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Logitude:" GridPane.rowIndex="4" />
-               <TextField fx:id="longitude_ID" editable="false" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hourly weather:" GridPane.rowIndex="5" />
-               <TextField fx:id="weatherRtf_ID" editable="false" focusTraversable="false" mouseTransparent="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hourly weather:" GridPane.rowIndex="3" />
+               <TextField fx:id="weatherRtf_ID" editable="false" focusTraversable="false" mouseTransparent="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </children>
          </GridPane>
       </children>
    </VBox>
-   <Separator focusTraversable="false" layoutX="8.0" layoutY="316.0" prefHeight="3.0" prefWidth="254.0" />
+   <Separator focusTraversable="false" layoutX="8.0" layoutY="252.0" prefHeight="3.0" prefWidth="254.0" />
 
    <Separator focusTraversable="false" layoutX="268.0" layoutY="23.0" orientation="VERTICAL" prefHeight="508.0" prefWidth="0.0" />
    <ImageView fx:id="imageView_ID" fitHeight="307.0" fitWidth="324.0" layoutX="274.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
@@ -85,19 +79,19 @@
       <Label focusTraversable="false" layoutX="91.0" layoutY="14.0" prefHeight="18.0" prefWidth="139.0" text="Machine Controller:" textAlignment="CENTER" underline="true" />
       <BorderPane layoutX="1.0" layoutY="42.0" mouseTransparent="true" prefHeight="137.0" prefWidth="306.0">
          <top>
-            <Button fx:id="forwardBtn_ID" accessibleHelp="W" accessibleText="W" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Forward" BorderPane.alignment="CENTER" />
+            <Button fx:id="forwardBtn_ID" accessibleHelp="W" accessibleText="W" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Forward (W)" BorderPane.alignment="CENTER" />
          </top>
          <left>
-            <Button accessibleHelp="A" accessibleText="A" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" prefHeight="32.0" prefWidth="76.0" text="Left" BorderPane.alignment="CENTER" />
+            <Button accessibleHelp="A" accessibleText="A" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Left (A)" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <Button accessibleHelp="D" accessibleText="D" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" prefHeight="32.0" prefWidth="74.0" text="Right" BorderPane.alignment="CENTER" />
+            <Button accessibleHelp="D" accessibleText="D" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Right(D)" BorderPane.alignment="CENTER" />
          </right>
          <center>
-            <Button accessibleHelp="S" accessibleText="S" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Reverse" BorderPane.alignment="CENTER" />
+            <Button accessibleHelp="S" accessibleText="S" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Reverse(S)" BorderPane.alignment="CENTER" />
          </center>
          <bottom>
-            <Button accessibleHelp="SPACE BAR" accessibleText="SPACE BAR" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" prefHeight="32.0" prefWidth="309.0" text="Stop" BorderPane.alignment="CENTER" />
+            <Button accessibleHelp="SPACE BAR" accessibleText="SPACE BAR" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" prefHeight="32.0" prefWidth="309.0" text="Stop (SPACE)" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
    </Pane>

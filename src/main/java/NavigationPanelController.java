@@ -50,22 +50,6 @@ public class NavigationPanelController {
             e.printStackTrace();
         }
 
-        /** Set Latitude and Longitude */
-        try{
-
-            String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
-            String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
-
-            latitude_ID.setText( latitude );
-            longitude_ID.setText( longitude );
-
-        }catch (Exception e){
-            latitude_ID.setText("N/A");
-            longitude_ID.setText("N/A");
-            System.out.println("Couldn't get Lat and Longitude data");
-            e.printStackTrace();
-        }
-
         /** Get weather data */
         try{
 
