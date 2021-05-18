@@ -105,7 +105,7 @@ public class NavigationPanelController {
     public void arrowKeyReleaseHandler(KeyEvent keyEvent) throws IOException {
 
         /** Values initializers for heatmap */
-        String direction = null;
+        String direction = "Forward";
         long distance = 0;
 
         /** Checks which key was released to map its released system time*/
@@ -128,7 +128,7 @@ public class NavigationPanelController {
                 backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
 
                 direction = "Forward";
-                distance = keyHeldDuration /1000;
+                distance = keyHeldDuration / 1000;
 
             }else{
                 forwardTrackingLog.append("Forward : " + keyHeldDuration %1000 + " millisec");
@@ -146,7 +146,7 @@ public class NavigationPanelController {
                 backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
 
                 direction = "Left";
-                distance = keyHeldDuration /1000;
+                distance = keyHeldDuration / 1000;
 
             }else{
                 forwardTrackingLog.append("Left        : " + keyHeldDuration %1000 + " millisec");
@@ -165,7 +165,7 @@ public class NavigationPanelController {
 
 
                 direction = "Reverse";
-                distance = keyHeldDuration /1000;
+                distance = keyHeldDuration / 1000;
 
             }else{
                 forwardTrackingLog.append("Reverse : " + keyHeldDuration %1000 + " millisec");
@@ -183,7 +183,7 @@ public class NavigationPanelController {
                 backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
 
                 direction = "Right";
-                distance = keyHeldDuration /1000;
+                distance = keyHeldDuration / 1000;
 
             }else{
                 forwardTrackingLog.append("Right     : " + keyHeldDuration %1000 + " millisec");
@@ -193,10 +193,10 @@ public class NavigationPanelController {
         }
         else if(currKey == KeyCode.SPACE){
             forwardTrackingLog.append("Brake");
-            forwardTrackingLog.append("\n");
-
             backTrackingLog.append("Brake");
-            backTrackingLog.append("\n");
+
+            direction = "Forward";
+            distance = 0;
         }
 
         /** Resets and pushes each log on next line in systemLogs textfield*/
@@ -204,13 +204,17 @@ public class NavigationPanelController {
         backTrackingLog.append("\n");
         keyHeldDuration = 0;
 
-        systemLogTA_ID.setText(String.valueOf(forwardTrackingLog));
+        /** Depending upon status of track-backtrack toggle show system log contect*/
+        if( !isBackTrackOn ){
+            systemLogTA_ID.setText(String.valueOf(forwardTrackingLog));
+        }else{
+            systemLogTA_ID.setText(String.valueOf(backTrackingLog));
+        }
 
-        /** Call method to calculate total distance covered w.r.t. seconds key was pressed*/
+        /** Call method to calculate total distance covered w.r.t. amount of time key was held*/
         totalDistanceTravelled();
 
         /** Sending data to heatMapGenerator class after each key release*/
-        assert direction != null;
         HeatMapGenerator.heatChartGenerator(direction, distance);
         HeatMapGenerator.heatMapGeneration();
 
