@@ -116,8 +116,13 @@ public class NavigationPanelController {
         }
     }
 
+
     /** System time - time when key was released */
+
     StringBuilder backTrackingLog = new StringBuilder();
+    StringBuilder forwardTrackingLog = new StringBuilder();
+
+
     public void arrowKeyReleaseHandler(KeyEvent keyEvent) throws IOException {
 
         /** Values initializers for heatmap */
@@ -136,8 +141,8 @@ public class NavigationPanelController {
         if (currKey == KeyCode.W ) {
 
             if(keyHeldDuration / 1000 > 0){
-                systemLogTA_ID.appendText("Forward : " + keyHeldDuration /1000 + " sec ");
-                systemLogTA_ID.appendText(keyHeldDuration % 1000 + " millisec");
+                forwardTrackingLog.append("Forward : " + keyHeldDuration /1000 + " sec ");
+                forwardTrackingLog.append(keyHeldDuration % 1000 + " millisec");
                 secondsTravelled += keyHeldDuration;
 
                 backTrackingLog.append("Reverse : ").append(keyHeldDuration / 1000).append(" sec ");
@@ -147,15 +152,15 @@ public class NavigationPanelController {
                 distance = keyHeldDuration /1000;
 
             }else{
-                systemLogTA_ID.appendText("Forward : " + keyHeldDuration %1000 + " millisec");
+                forwardTrackingLog.append("Forward : " + keyHeldDuration %1000 + " millisec");
                 backTrackingLog.append("Reverse : ").append(keyHeldDuration % 1000).append(" millisec");
             }
 
         }
         else if (currKey == KeyCode.A){
             if(keyHeldDuration /1000 > 0){
-                systemLogTA_ID.appendText("Left        : " + keyHeldDuration /1000 + " sec ");
-                systemLogTA_ID.appendText(keyHeldDuration %1000 + " millisec");
+                forwardTrackingLog.append("Left        : " + keyHeldDuration /1000 + " sec ");
+                forwardTrackingLog.append(keyHeldDuration %1000 + " millisec");
                 secondsTravelled += keyHeldDuration;
 
                 backTrackingLog.append("Right      : ").append(keyHeldDuration / 1000).append(" sec ");
@@ -165,15 +170,15 @@ public class NavigationPanelController {
                 distance = keyHeldDuration /1000;
 
             }else{
-                systemLogTA_ID.appendText("Left        : " + keyHeldDuration %1000 + " millisec");
+                forwardTrackingLog.append("Left        : " + keyHeldDuration %1000 + " millisec");
                 backTrackingLog.append("Right      : ").append(keyHeldDuration % 1000).append(" millisec");
             }
 
         }
         else if(currKey == KeyCode.S){
             if(keyHeldDuration /1000 > 0){
-                systemLogTA_ID.appendText("Reverse : " + keyHeldDuration /1000 + " sec ");
-                systemLogTA_ID.appendText(keyHeldDuration %1000 + " millisec");
+                forwardTrackingLog.append("Reverse : " + keyHeldDuration /1000 + " sec ");
+                forwardTrackingLog.append(keyHeldDuration %1000 + " millisec");
                 secondsTravelled += keyHeldDuration;
 
                 backTrackingLog.append("Forward : ").append(keyHeldDuration / 1000).append(" sec ");
@@ -184,15 +189,15 @@ public class NavigationPanelController {
                 distance = keyHeldDuration /1000;
 
             }else{
-                systemLogTA_ID.appendText("Reverse : " + keyHeldDuration %1000 + " millisec");
+                forwardTrackingLog.append("Reverse : " + keyHeldDuration %1000 + " millisec");
                 backTrackingLog.append("Forward : ").append(keyHeldDuration % 1000).append(" millisec");
             }
 
         }
         else if(currKey == KeyCode.D){
             if(keyHeldDuration /1000 > 0){
-                systemLogTA_ID.appendText("Right     : " + keyHeldDuration /1000 + " sec ");
-                systemLogTA_ID.appendText(keyHeldDuration %1000 + " millisec");
+                forwardTrackingLog.append("Right     : " + keyHeldDuration /1000 + " sec ");
+                forwardTrackingLog.append(keyHeldDuration %1000 + " millisec");
                 secondsTravelled += keyHeldDuration;
 
                 backTrackingLog.append("Left       : ").append(keyHeldDuration / 1000).append(" sec ");
@@ -202,23 +207,25 @@ public class NavigationPanelController {
                 distance = keyHeldDuration /1000;
 
             }else{
-                systemLogTA_ID.appendText("Right     : " + keyHeldDuration %1000 + " millisec");
+                forwardTrackingLog.append("Right     : " + keyHeldDuration %1000 + " millisec");
                 backTrackingLog.append("Left       : ").append(keyHeldDuration % 1000).append(" millisec");
             }
 
         }
         else if(currKey == KeyCode.SPACE){
-            systemLogTA_ID.appendText("Brake");
-            systemLogTA_ID.appendText("\n");
+            forwardTrackingLog.append("Brake");
+            forwardTrackingLog.append("\n");
 
             backTrackingLog.append("Brake");
             backTrackingLog.append("\n");
         }
 
         /** Resets and pushes each log on next line in systemLogs textfield*/
-        systemLogTA_ID.appendText("\n");
+        forwardTrackingLog.append("\n");
         backTrackingLog.append("\n");
         keyHeldDuration = 0;
+
+        systemLogTA_ID.setText(String.valueOf(forwardTrackingLog));
 
         /** Call method to calculate total distance covered w.r.t. seconds key was pressed*/
         totalDistanceTravelled();
@@ -249,8 +256,16 @@ public class NavigationPanelController {
     }
 
     /** Backtrack logs */
+    boolean isBackTrackOn = false;
     public void backtrackBtnClicked() {
-        systemLogTA_ID.setText(String.valueOf(backTrackingLog));
+        if(!isBackTrackOn){
+            isBackTrackOn = true;
+            systemLogTA_ID.setText(String.valueOf(backTrackingLog));
+        }else{
+            isBackTrackOn = false;
+            systemLogTA_ID.setText(String.valueOf(forwardTrackingLog));
+        }
+
     }
 
     /** Battery of laptop/vehicle displayed here */
@@ -275,7 +290,9 @@ public class NavigationPanelController {
         byte[] pixels = ((DataBufferByte) capturedImage.getRaster().getDataBuffer()).getData();
         Mat capturedMat = new Mat(capturedImage.getHeight(), capturedImage.getWidth(), CvType.CV_8UC3);
         capturedMat.put(0, 0, pixels);
+
         ImageProcessor.detectFaceFromImages(capturedMat, isCaptureClicked);
+
         isCaptureClicked = false;
         webCamObj.close();
         turnOnVideoCam();

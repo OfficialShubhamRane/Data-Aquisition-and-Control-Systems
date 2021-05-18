@@ -103,7 +103,7 @@
    </Pane>
    <Separator focusTraversable="false" layoutX="603.0" layoutY="23.0" orientation="VERTICAL" prefHeight="508.0" prefWidth="0.0" />
    <Label focusTraversable="false" layoutX="623.0" layoutY="38.0" text="Log Details" underline="true" />
-   <Button layoutX="750.0" layoutY="31.0" mnemonicParsing="false" onAction="#backtrackBtnClicked" text="Backtrack" />
+   <Button fx:id="backTrack_btn" layoutX="750.0" layoutY="31.0" mnemonicParsing="false" onAction="#backtrackBtnClicked" text="Backtrack" />
    <TextArea fx:id="systemLogTA_ID" editable="false" layoutX="623.0" layoutY="71.0" prefHeight="458.0" prefWidth="200.0" promptText="System Log will be printed here." />
    <Text layoutX="14.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Shubham Rane" />
 </AnchorPane>
