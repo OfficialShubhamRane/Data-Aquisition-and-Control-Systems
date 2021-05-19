@@ -16,10 +16,13 @@ public class GoogleMapGenerator {
         /** Activate this code when Lat long API is responding */
         /** My perfect co-ordinates are: 40.75028544,-74.04422841 */
         try{
+
             String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
             String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
             urlForMap  = new URL("https://maps.googleapis.com/maps/api/staticmap?center="+ latitude +","+ longitude +"&zoom=19&size=883x904&maptype=satellite&key="
                     + Constants.googleMapAPI_key);
+
+            /** For Congress Street specific code*/
 //            urlForMap  = new URL(Constants.congressStreetHardCoded_Link + Constants.googleMapAPI_key);
         }catch ( IOException ie ){
             /** URL with hard coded lat and long for the moments when lat & long API is not responding*/
