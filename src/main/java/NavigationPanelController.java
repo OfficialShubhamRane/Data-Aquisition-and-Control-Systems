@@ -94,20 +94,26 @@ public class NavigationPanelController {
         currKey = keyEvent.getCode();
         if(currKey != lastKey){
             lastKey = currKey;
-            if(currKey == KeyCode.W){ //UP
+            if(currKey == KeyCode.W){ // UP
                 keyPressedSystemTime = System.currentTimeMillis();
             }
-            else if(currKey == KeyCode.D){ //RIGHT
+            else if(currKey == KeyCode.D){ // RIGHT
                 keyPressedSystemTime = System.currentTimeMillis();
             }
-            else if(currKey == KeyCode.A){ //LEFT
+            else if(currKey == KeyCode.A){ // LEFT
                 keyPressedSystemTime = System.currentTimeMillis();
             }
-            else if(currKey == KeyCode.S){ //DOWN/BACK
+            else if(currKey == KeyCode.S){ // DOWN/BACK
                 keyPressedSystemTime = System.currentTimeMillis();
             }
             else if(currKey == KeyCode.SPACE){ // Stop/Space
                 keyPressedSystemTime = System.currentTimeMillis();
+            }
+            else if(currKey == KeyCode.E){ // Capture Photo
+                captureImageBtnClicked();
+            }
+            else if(currKey == KeyCode.TAB){ // Capture Photo
+                backtrackBtnClicked();
             }
         }
     }

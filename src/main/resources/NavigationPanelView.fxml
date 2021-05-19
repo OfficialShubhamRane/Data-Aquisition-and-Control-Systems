@@ -72,7 +72,7 @@
 
    <Separator focusTraversable="false" layoutX="268.0" layoutY="23.0" orientation="VERTICAL" prefHeight="508.0" prefWidth="0.0" />
    <ImageView fx:id="imageView_ID" fitHeight="307.0" fitWidth="324.0" layoutX="274.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
-   <Button fx:id="captureImageBtn_ID" focusTraversable="false" layoutX="280.0" layoutY="307.0" mnemonicParsing="false" onAction="#captureImageBtnClicked" prefHeight="32.0" prefWidth="314.0" text="Capture" />
+   <Button fx:id="captureImageBtn_ID" focusTraversable="false" layoutX="280.0" layoutY="307.0" mnemonicParsing="false" onAction="#captureImageBtnClicked" prefHeight="32.0" prefWidth="314.0" text="Capture (E)" />
    <Separator focusTraversable="false" layoutX="275.0" layoutY="349.0" prefHeight="3.0" prefWidth="324.0" />
 
    <Pane layoutX="283.0" layoutY="352.0" mouseTransparent="true" prefHeight="204.0" prefWidth="306.0">
