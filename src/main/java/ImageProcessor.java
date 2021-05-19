@@ -10,7 +10,7 @@ import java.io.InputStream;
 
 public class ImageProcessor {
 
-    /** Simple reading and writting image from specified path - Testing*/
+    /** Simple reading and writting image from specified path - For Testing*/
     /**
     public Mat readImg(){
         Imgcodecs.imread("src/main/resources/img1.jpg");
@@ -29,16 +29,16 @@ public class ImageProcessor {
 
         MatOfRect facesDetected = new MatOfRect();
 
-        CascadeClassifier cascadeClassifier = new CascadeClassifier();
         int minFaceSize = Math.round(capturedMat.rows() * 0.1f);
+
+        CascadeClassifier cascadeClassifier = new CascadeClassifier();
         cascadeClassifier.load(Constants.frontalFaceCascadeDirectory);
         cascadeClassifier.detectMultiScale(capturedMat,
                 facesDetected,
                 1.1,
                 3,
                 Objdetect.CASCADE_SCALE_IMAGE,
-                new Size(minFaceSize, minFaceSize),
-                new Size()
+                new Size(minFaceSize, minFaceSize)
         );
 
         Rect[] facesArray = facesDetected.toArray();

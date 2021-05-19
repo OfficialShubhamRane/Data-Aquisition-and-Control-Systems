@@ -17,9 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NavigationPanelController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" prefHeight="537.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NavigationPanelController">
    <Separator layoutX="1.0" layoutY="21.0" prefHeight="3.0" prefWidth="834.0" />
-   <VBox layoutX="14.0" layoutY="33.0" prefHeight="274.0" prefWidth="243.0">
+   <VBox layoutX="14.0" layoutY="33.0" prefHeight="219.0" prefWidth="243.0">
       <children>
          <Label text="Operator Details: " underline="true">
             <padding>
@@ -46,15 +46,13 @@
          </Label>
          <GridPane mouseTransparent="true">
            <columnConstraints>
-             <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="129.4" />
-             <ColumnConstraints hgrow="SOMETIMES" maxWidth="123.60000610351562" minWidth="10.0" prefWidth="113.4" />
+             <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="93.59999237060546" />
+             <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.60000762939453" minWidth="10.0" prefWidth="149.60000762939453" />
            </columnConstraints>
            <rowConstraints>
              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
            </rowConstraints>
             <children>
@@ -62,48 +60,44 @@
                <Label text="Machine_1.1" GridPane.columnIndex="1" />
                <Label text="Battery Life: " GridPane.rowIndex="1" />
                <TextField fx:id="batteryLife_ID" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="74.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-               <Label text="Dist. Covered (meters)" GridPane.rowIndex="2" />
+               <Label text="Dist. / m:" GridPane.rowIndex="2" />
                <TextField fx:id="distanceCovered_ID" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="76.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Latitude:" GridPane.rowIndex="3" />
-               <TextField fx:id="latitude_ID" editable="false" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Logitude:" GridPane.rowIndex="4" />
-               <TextField fx:id="longitude_ID" editable="false" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Weather for an hour" GridPane.rowIndex="5" />
-               <TextField fx:id="weatherRtf_ID" editable="false" focusTraversable="false" mouseTransparent="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hourly weather:" GridPane.rowIndex="3" />
+               <TextField fx:id="weatherRtf_ID" editable="false" focusTraversable="false" mouseTransparent="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </children>
          </GridPane>
       </children>
    </VBox>
-   <Separator focusTraversable="false" layoutX="8.0" layoutY="316.0" prefHeight="3.0" prefWidth="254.0" />
+   <Separator focusTraversable="false" layoutX="8.0" layoutY="252.0" prefHeight="3.0" prefWidth="254.0" />
 
    <Separator focusTraversable="false" layoutX="268.0" layoutY="23.0" orientation="VERTICAL" prefHeight="508.0" prefWidth="0.0" />
    <ImageView fx:id="imageView_ID" fitHeight="307.0" fitWidth="324.0" layoutX="274.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
-   <Button fx:id="captureImageBtn_ID" focusTraversable="false" layoutX="280.0" layoutY="307.0" mnemonicParsing="false" onAction="#captureImageBtnClicked" prefHeight="32.0" prefWidth="314.0" text="Capture" />
+   <Button fx:id="captureImageBtn_ID" focusTraversable="false" layoutX="280.0" layoutY="307.0" mnemonicParsing="false" onAction="#captureImageBtnClicked" prefHeight="32.0" prefWidth="314.0" text="Capture (E)" />
    <Separator focusTraversable="false" layoutX="275.0" layoutY="349.0" prefHeight="3.0" prefWidth="324.0" />
 
    <Pane layoutX="283.0" layoutY="352.0" mouseTransparent="true" prefHeight="204.0" prefWidth="306.0">
       <Label focusTraversable="false" layoutX="91.0" layoutY="14.0" prefHeight="18.0" prefWidth="139.0" text="Machine Controller:" textAlignment="CENTER" underline="true" />
-      <BorderPane layoutX="1.0" layoutY="42.0" mouseTransparent="true" prefHeight="137.0" prefWidth="306.0">
+      <BorderPane focusTraversable="true" layoutX="1.0" layoutY="42.0" mouseTransparent="true" prefHeight="137.0" prefWidth="306.0">
          <top>
-            <Button fx:id="forwardBtn_ID" accessibleHelp="W" accessibleText="W" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Forward" BorderPane.alignment="CENTER" />
+            <Button accessibleHelp="W" accessibleText="W" focusTraversable="false" mnemonicParsing="false" mouseTransparent="true" text="Forward (W)" BorderPane.alignment="CENTER" />
          </top>
          <left>
-            <Button accessibleHelp="A" accessibleText="A" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" prefHeight="32.0" prefWidth="76.0" text="Left" BorderPane.alignment="CENTER" />
+            <Button accessibleHelp="A" accessibleText="A" focusTraversable="false" mnemonicParsing="false" mouseTransparent="true" text="Left (A)" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <Button accessibleHelp="D" accessibleText="D" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" prefHeight="32.0" prefWidth="74.0" text="Right" BorderPane.alignment="CENTER" />
+            <Button accessibleHelp="D" accessibleText="D" focusTraversable="false" mnemonicParsing="false" mouseTransparent="true" text="Right(D)" BorderPane.alignment="CENTER" />
          </right>
          <center>
-            <Button accessibleHelp="S" accessibleText="S" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Reverse" BorderPane.alignment="CENTER" />
+            <Button accessibleHelp="S" accessibleText="S" focusTraversable="false" mnemonicParsing="false" mouseTransparent="true" text="Reverse(S)" BorderPane.alignment="CENTER" />
          </center>
          <bottom>
-            <Button accessibleHelp="SPACE BAR" accessibleText="SPACE BAR" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" prefHeight="32.0" prefWidth="309.0" text="Stop" BorderPane.alignment="CENTER" />
+            <Button accessibleHelp="SPACE BAR" accessibleText="SPACE BAR" focusTraversable="false" mnemonicParsing="false" mouseTransparent="true" prefHeight="32.0" prefWidth="309.0" text="Stop (SPACE)" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
    </Pane>
    <Separator focusTraversable="false" layoutX="603.0" layoutY="23.0" orientation="VERTICAL" prefHeight="508.0" prefWidth="0.0" />
    <Label focusTraversable="false" layoutX="623.0" layoutY="38.0" text="Log Details" underline="true" />
-   <Button layoutX="750.0" layoutY="31.0" mnemonicParsing="false" onAction="#backtrackBtnClicked" text="Backtrack" />
-   <TextArea fx:id="systemLogTA_ID" editable="false" layoutX="623.0" layoutY="71.0" prefHeight="458.0" prefWidth="200.0" promptText="System Log will be printed here." />
+   <Button fx:id="backTrack_btn" focusTraversable="false" layoutX="750.0" layoutY="31.0" mnemonicParsing="false" onAction="#backtrackBtnClicked" prefHeight="32.0" prefWidth="75.2" text="Backtrack" />
+   <TextArea fx:id="systemLogTA_ID" editable="false" focusTraversable="false" layoutX="623.0" layoutY="71.0" prefHeight="458.0" prefWidth="200.0" promptText="System Log will be printed here." />
    <Text layoutX="14.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Shubham Rane" />
 </AnchorPane>
