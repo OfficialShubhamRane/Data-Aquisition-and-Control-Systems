@@ -3,6 +3,9 @@
 
 import com.github.sarxos.webcam.Webcam;
 import javafx.animation.AnimationTimer;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -15,6 +18,7 @@ import org.opencv.videoio.VideoCapture;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class NavigationPanelController {
@@ -28,7 +32,12 @@ public class NavigationPanelController {
     public TextField weatherRtf_ID;
     public Button backTrack_btn;
 
-    /** Initialize Value */
+    public NavigationPanelController() throws IOException {
+    }
+
+    /**
+     * Initialize Value
+     * */
     public void initialize() throws IOException {
 
         /** Sets operator name fetching from user_ID field from login */
@@ -68,6 +77,7 @@ public class NavigationPanelController {
 
     }
 
+
     /**
      * Calculating for How long key was pressed
      * */
@@ -76,7 +86,10 @@ public class NavigationPanelController {
     private long keyPressedSystemTime = 0;
     private long keyHeldDuration = 0;
 
-    /** System time when key was pressed */
+    /**
+     * System time when key was pressed
+     * */
+
     public void arrowKeyStrokesHandler(KeyEvent keyEvent) {
         currKey = keyEvent.getCode();
         if(currKey != lastKey){
@@ -99,7 +112,9 @@ public class NavigationPanelController {
         }
     }
 
-    /** System time when key was released */
+    /**
+     * System time when key was released
+     * */
     StringBuilder backTrackingLog = new StringBuilder();
     StringBuilder forwardTrackingLog = new StringBuilder();
     public void arrowKeyReleaseHandler(KeyEvent keyEvent) throws IOException {
@@ -135,6 +150,9 @@ public class NavigationPanelController {
                 backTrackingLog.append("Reverse : ").append(keyHeldDuration % 1000).append(" millisec");
             }
 
+            forwardTrackingLog.append("\n");
+            backTrackingLog.append("\n");
+
         }
         else if (currKey == KeyCode.A){
             if(keyHeldDuration /1000 > 0){
@@ -152,6 +170,9 @@ public class NavigationPanelController {
                 forwardTrackingLog.append("Left        : " + keyHeldDuration %1000 + " millisec");
                 backTrackingLog.append("Right      : ").append(keyHeldDuration % 1000).append(" millisec");
             }
+
+            forwardTrackingLog.append("\n");
+            backTrackingLog.append("\n");
 
         }
         else if(currKey == KeyCode.S){
@@ -172,6 +193,9 @@ public class NavigationPanelController {
                 backTrackingLog.append("Forward : ").append(keyHeldDuration % 1000).append(" millisec");
             }
 
+            forwardTrackingLog.append("\n");
+            backTrackingLog.append("\n");
+
         }
         else if(currKey == KeyCode.D){
             if(keyHeldDuration /1000 > 0){
@@ -190,6 +214,9 @@ public class NavigationPanelController {
                 backTrackingLog.append("Left       : ").append(keyHeldDuration % 1000).append(" millisec");
             }
 
+            forwardTrackingLog.append("\n");
+            backTrackingLog.append("\n");
+
         }
         else if(currKey == KeyCode.SPACE){
             forwardTrackingLog.append("Brake");
@@ -197,11 +224,14 @@ public class NavigationPanelController {
 
             direction = "Forward";
             distance = 0;
+
+            forwardTrackingLog.append("\n");
+            backTrackingLog.append("\n");
         }
 
         /** Resets and pushes each log on next line in systemLogs textfield*/
-        forwardTrackingLog.append("\n");
-        backTrackingLog.append("\n");
+
+
         keyHeldDuration = 0;
 
         /** Depending upon status of track-backtrack toggle show system log contect*/
@@ -226,7 +256,9 @@ public class NavigationPanelController {
 
     }
 
-    /** Total distance travelled */
+    /**
+     * Total distance travelled
+     * */
     float secondsTravelled = 0;
     float movedDistance = 0;
     double vehicleSpeed = 5.0; // 50 miles per hour
@@ -238,7 +270,9 @@ public class NavigationPanelController {
         System.out.println(movedDistance);
     }
 
-    /** Toggle between Track & Backtrack logs */
+    /**
+     * Toggle between Track & Backtrack logs
+     * */
     boolean isBackTrackOn = false;
     public void backtrackBtnClicked() {
         if(!isBackTrackOn){
@@ -253,14 +287,18 @@ public class NavigationPanelController {
 
     }
 
-    /** Battery of laptop/vehicle displayed here */
+    /**
+     * Battery of laptop/vehicle displayed here
+     * */
     private void batteryStatusChecker(){
         Kernel32.SYSTEM_POWER_STATUS batteryStatus = new Kernel32.SYSTEM_POWER_STATUS();
         Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
         batteryLife_ID.setText(batteryStatus.toString());
     }
 
-    /** Capture Images from default camera and sent to ImageProcessor */
+    /**
+     * Capture Images from default camera and sent to ImageProcessor
+     * */
     boolean isCaptureClicked = false;
     public void captureImageBtnClicked() {
 
@@ -283,7 +321,9 @@ public class NavigationPanelController {
         turnOnVideoCam();
     }
 
-    /** Capture video from video cam **/
+    /**
+     * Capture video from video cam
+     * */
     static VideoCapture capture;
     private void turnOnVideoCam() {
         capture = new VideoCapture(0);

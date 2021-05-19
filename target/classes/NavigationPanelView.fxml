@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NavigationPanelController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" prefHeight="537.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NavigationPanelController">
    <Separator layoutX="1.0" layoutY="21.0" prefHeight="3.0" prefWidth="834.0" />
    <VBox layoutX="14.0" layoutY="33.0" prefHeight="219.0" prefWidth="243.0">
       <children>
@@ -77,27 +77,27 @@
 
    <Pane layoutX="283.0" layoutY="352.0" mouseTransparent="true" prefHeight="204.0" prefWidth="306.0">
       <Label focusTraversable="false" layoutX="91.0" layoutY="14.0" prefHeight="18.0" prefWidth="139.0" text="Machine Controller:" textAlignment="CENTER" underline="true" />
-      <BorderPane layoutX="1.0" layoutY="42.0" mouseTransparent="true" prefHeight="137.0" prefWidth="306.0">
+      <BorderPane focusTraversable="true" layoutX="1.0" layoutY="42.0" mouseTransparent="true" prefHeight="137.0" prefWidth="306.0">
          <top>
-            <Button accessibleHelp="W" accessibleText="W" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Forward (W)" BorderPane.alignment="CENTER" />
+            <Button accessibleHelp="W" accessibleText="W" focusTraversable="false" mnemonicParsing="false" mouseTransparent="true" text="Forward (W)" BorderPane.alignment="CENTER" />
          </top>
          <left>
-            <Button accessibleHelp="A" accessibleText="A" focusTraversable="false" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Left (A)" BorderPane.alignment="CENTER" />
+            <Button accessibleHelp="A" accessibleText="A" focusTraversable="false" mnemonicParsing="false" mouseTransparent="true" text="Left (A)" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <Button accessibleHelp="D" accessibleText="D" focusTraversable="false" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Right(D)" BorderPane.alignment="CENTER" />
+            <Button accessibleHelp="D" accessibleText="D" focusTraversable="false" mnemonicParsing="false" mouseTransparent="true" text="Right(D)" BorderPane.alignment="CENTER" />
          </right>
          <center>
-            <Button accessibleHelp="S" accessibleText="S" focusTraversable="false" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" text="Reverse(S)" BorderPane.alignment="CENTER" />
+            <Button accessibleHelp="S" accessibleText="S" focusTraversable="false" mnemonicParsing="false" mouseTransparent="true" text="Reverse(S)" BorderPane.alignment="CENTER" />
          </center>
          <bottom>
-            <Button accessibleHelp="SPACE BAR" accessibleText="SPACE BAR" focusTraversable="false" mnemonicParsing="false" mouseTransparent="true" onKeyPressed="#arrowKeyStrokesHandler" onKeyReleased="#arrowKeyReleaseHandler" prefHeight="32.0" prefWidth="309.0" text="Stop (SPACE)" BorderPane.alignment="CENTER" />
+            <Button accessibleHelp="SPACE BAR" accessibleText="SPACE BAR" focusTraversable="false" mnemonicParsing="false" mouseTransparent="true" prefHeight="32.0" prefWidth="309.0" text="Stop (SPACE)" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
    </Pane>
    <Separator focusTraversable="false" layoutX="603.0" layoutY="23.0" orientation="VERTICAL" prefHeight="508.0" prefWidth="0.0" />
    <Label focusTraversable="false" layoutX="623.0" layoutY="38.0" text="Log Details" underline="true" />
-   <Button fx:id="backTrack_btn" layoutX="750.0" layoutY="31.0" mnemonicParsing="false" onAction="#backtrackBtnClicked" prefHeight="32.0" prefWidth="75.2" text="Backtrack" />
+   <Button fx:id="backTrack_btn" focusTraversable="false" layoutX="750.0" layoutY="31.0" mnemonicParsing="false" onAction="#backtrackBtnClicked" prefHeight="32.0" prefWidth="75.2" text="Backtrack" />
    <TextArea fx:id="systemLogTA_ID" editable="false" focusTraversable="false" layoutX="623.0" layoutY="71.0" prefHeight="458.0" prefWidth="200.0" promptText="System Log will be printed here." />
    <Text layoutX="14.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Shubham Rane" />
 </AnchorPane>

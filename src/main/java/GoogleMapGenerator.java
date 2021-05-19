@@ -20,6 +20,7 @@ public class GoogleMapGenerator {
             String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
             urlForMap  = new URL("https://maps.googleapis.com/maps/api/staticmap?center="+ latitude +","+ longitude +"&zoom=19&size=883x904&maptype=satellite&key="
                     + Constants.googleMapAPI_key);
+//            urlForMap  = new URL(Constants.congressStreetHardCoded_Link + Constants.googleMapAPI_key);
         }catch ( IOException ie ){
             /** URL with hard coded lat and long for the moments when lat & long API is not responding*/
             urlForMap  = new URL(Constants.congressStreetHardCoded_Link + Constants.googleMapAPI_key);
