@@ -14,7 +14,8 @@ public class HeatMapGenerator {
 
     /** Creating heatChart for visualizing vehicle movements */
     private static final double[][] heatChartData = new double[41][41];
-    /** Start point is 11,11 index */
+
+    /** Start point is 20.5,20.5 index */
     private static final double i = heatChartData.length / 2.0;
     private static final double j = i;
 

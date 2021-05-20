@@ -237,7 +237,6 @@ public class NavigationPanelController {
 
         /** Resets and pushes each log on next line in systemLogs textfield*/
 
-
         keyHeldDuration = 0;
 
         /** Depending upon status of track-backtrack toggle show system log contect*/
