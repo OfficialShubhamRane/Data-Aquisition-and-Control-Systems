@@ -1,11 +1,7 @@
-
 /** Author: Shubham Rane www.linkedin.com/in/shubham-rane97 **/
 
 import com.github.sarxos.webcam.Webcam;
 import javafx.animation.AnimationTimer;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -18,7 +14,6 @@ import org.opencv.videoio.VideoCapture;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.IOException;
-import java.util.Objects;
 
 
 public class NavigationPanelController {
@@ -47,6 +42,9 @@ public class NavigationPanelController {
         Kernel32.SYSTEM_POWER_STATUS batteryStatus = new Kernel32.SYSTEM_POWER_STATUS();
         Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
         batteryLife_ID.setText(batteryStatus.toString());
+
+        backTrack_btn.setText("Backtrack (TAB)");
+        distanceCovered_ID.setText("0.0");
 
         /** Turn on Video Cam */
         try{
@@ -282,11 +280,11 @@ public class NavigationPanelController {
     public void backtrackBtnClicked() {
         if(!isBackTrackOn){
             isBackTrackOn = true;
-            backTrack_btn.setText("Track");
+            backTrack_btn.setText("Track (TAB)");
             systemLogTA_ID.setText(String.valueOf(backTrackingLog));
         }else{
             isBackTrackOn = false;
-            backTrack_btn.setText("Backtrack");
+            backTrack_btn.setText("Backtrack (TAB)");
             systemLogTA_ID.setText(String.valueOf(forwardTrackingLog));
         }
 
@@ -305,7 +303,7 @@ public class NavigationPanelController {
      * Capture Images from default camera and sent to ImageProcessor
      * */
     boolean isCaptureClicked = false;
-    public void captureImageBtnClicked() {
+    public void captureImageBtnClicked(){
 
         isCaptureClicked = true;
         ImageProcessor.stopCapture();
@@ -329,8 +327,8 @@ public class NavigationPanelController {
     /**
      * Capture video from video cam
      * */
-    static VideoCapture capture;
-    private void turnOnVideoCam() {
+    public static VideoCapture capture;
+    public void turnOnVideoCam() {
         capture = new VideoCapture(0);
 
         new AnimationTimer() {
