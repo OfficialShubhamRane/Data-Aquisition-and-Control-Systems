@@ -61,7 +61,7 @@
                <Label text="Battery Life: " GridPane.rowIndex="1" />
                <TextField fx:id="batteryLife_ID" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="74.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                <Label text="Dist. / m:" GridPane.rowIndex="2" />
-               <TextField fx:id="distanceCovered_ID" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="76.0" promptText="0.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               <TextField fx:id="distanceCovered_ID" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="76.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hourly weather:" GridPane.rowIndex="3" />
                <TextField fx:id="weatherRtf_ID" editable="false" focusTraversable="false" mouseTransparent="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </children>
@@ -97,7 +97,7 @@
    </Pane>
    <Separator focusTraversable="false" layoutX="603.0" layoutY="23.0" orientation="VERTICAL" prefHeight="508.0" prefWidth="0.0" />
    <Label focusTraversable="false" layoutX="623.0" layoutY="38.0" text="Log Details" underline="true" />
-   <Button fx:id="backTrack_btn" focusTraversable="false" layoutX="720.0" layoutY="31.0" mnemonicParsing="false" onAction="#backtrackBtnClicked" prefHeight="32.0" prefWidth="100.0" text="Backtrack (TAB)" />
+   <Button fx:id="backTrack_btn" focusTraversable="false" layoutX="711.0" layoutY="31.0" mnemonicParsing="false" onAction="#backtrackBtnClicked" prefHeight="32.0" prefWidth="114.0" text="Backtrack (TAB)" />
    <TextArea fx:id="systemLogTA_ID" editable="false" focusTraversable="false" layoutX="623.0" layoutY="71.0" prefHeight="458.0" prefWidth="200.0" promptText="System Log will be printed here." />
    <Text layoutX="14.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Shubham Rane" />
 </AnchorPane>
