@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.opencv.core.Core;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -38,7 +40,8 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        
+        Logger loggerObj = LoggerFactory.getLogger(Main.class);
+        loggerObj.info(" Loaded Login Screen");
 
     }
 }

@@ -49,8 +49,8 @@ public class HeatMapGenerator {
 
         double m = ori_i;
         double n = ori_j;
-        System.out.println("ori_i : " + ori_i + "ori_j : " + ori_j);
-        System.out.println("desti_i : " + desti_i + "desti_j : " + desti_j);
+//        System.out.println("ori_i : " + ori_i + "ori_j : " + ori_j);
+//        System.out.println("desti_i : " + desti_i + "desti_j : " + desti_j);
 
         /** Forward marking **/
         while(m > desti_i && direction.equals("Forward")){

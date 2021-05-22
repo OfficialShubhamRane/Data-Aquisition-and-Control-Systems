@@ -11,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
+
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.IOException;
@@ -33,31 +34,33 @@ public class NavigationPanelController {
     /**
      * Initialize Value
      * */
-    public void initialize() throws IOException {
+    public void initialize() {
+
+        System.out.println( "Setting up : Operator name, Battery, Camera, Weather data");
 
         /** Sets operator name fetching from user_ID field from login */
-        opName_ID.setText(LoginController.operatorName);
+        opName_ID.setText( LoginController.operatorName );
 
         /** Battery of laptop showing here can be replaced with vehicles battery */
         Kernel32.SYSTEM_POWER_STATUS batteryStatus = new Kernel32.SYSTEM_POWER_STATUS();
         Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
         batteryLife_ID.setText(batteryStatus.toString());
 
-        backTrack_btn.setText("Backtrack (TAB)");
-        distanceCovered_ID.setText("0.0");
 
         /** Turn on Video Cam */
         try{
-
             turnOnVideoCam();
+            System.out.println("Camera: Camera Successfully Started");
 
         }catch (Exception e){
-            System.out.println("Camera Failed to Start");
+            System.out.println("Camera: Camera Failed to Start");
             e.printStackTrace();
         }
 
         /** Get weather data */
         try{
+
+            System.out.println("Attempting to get weather data");
 
             /** Gets Latitude and Longitude */
             String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
@@ -66,10 +69,11 @@ public class NavigationPanelController {
             /** Call Weather api for weather data */
             String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
             weatherRtf_ID.setText( currentWeather );
+            System.out.println("Successfully fetched weather data");
 
         }catch(Exception e){
             weatherRtf_ID.setText("N/A");
-            System.out.println("Couldn't get weather data");
+            System.out.println("Couldn't fetch weather data");
             e.printStackTrace();
         }
 
@@ -266,11 +270,10 @@ public class NavigationPanelController {
     float movedDistance = 0;
     double vehicleSpeed = 5.0; // 50 miles per hour
     private void totalDistanceTravelled(){
-        System.out.println(secondsTravelled);
 
         movedDistance = (float) ( (vehicleSpeed / 360.0) * secondsTravelled);
         distanceCovered_ID.setText(String.valueOf(movedDistance));
-        System.out.println(movedDistance);
+
     }
 
     /**
@@ -305,9 +308,12 @@ public class NavigationPanelController {
     boolean isCaptureClicked = false;
     public void captureImageBtnClicked(){
 
+        System.out.println("Camera: Attempting to capture Image");
+
         isCaptureClicked = true;
         ImageProcessor.stopCapture();
 
+        System.out.println("Camera: Acquiring camera resource to capture Image");
         Webcam webCamObj = Webcam.getDefault();
         webCamObj.open();
 
@@ -317,10 +323,13 @@ public class NavigationPanelController {
         Mat capturedMat = new Mat(capturedImage.getHeight(), capturedImage.getWidth(), CvType.CV_8UC3);
         capturedMat.put(0, 0, pixels);
 
+        System.out.println("Camera: Performing face Detection");
         ImageProcessor.detectFaceFromImages(capturedMat, isCaptureClicked);
 
         isCaptureClicked = false;
+        System.out.println("Camera: Releasing Camera resource after capture");
         webCamObj.close();
+        System.out.println("Camera: Attempting to acquire camera resource for Video streaming");
         turnOnVideoCam();
     }
 
@@ -338,6 +347,7 @@ public class NavigationPanelController {
             }
         }.start();
 
+        System.out.println("Camera: Successfully acquired camera resource for video streaming");
     }
 
 }

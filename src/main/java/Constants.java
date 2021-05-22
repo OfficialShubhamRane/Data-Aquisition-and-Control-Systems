@@ -29,6 +29,8 @@ public class Constants {
 
         Map<String, String> weatherMap = new HashMap<>();
 
+        weatherMap.put("-1","N/A");
+
         weatherMap.put("200","Thunderstorm with light rain");
         weatherMap.put("201","Thunderstorm with  rain");
         weatherMap.put("202","Thunderstorm with heavy rain");

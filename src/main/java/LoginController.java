@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,6 +21,8 @@ public class LoginController {
 
     @FXML
     public static String operatorName;
+    private String operatorPass;
+
     public Label invalidUserLb_ID;
 
     @FXML
@@ -28,19 +32,24 @@ public class LoginController {
     private TextField userIDTf_ID;
     public boolean isValidUser;
 
+    LoginDAO loginDAOObj;
     NotificationsGenerator notificationObject;
 
     public void initialize(){
+
+        System.out.println("Loaded Login Screen");
         invalidUserLb_ID.setVisible(false);
-        notificationObject = new NotificationsGenerator();
+        loginDAOObj = new LoginDAO();
+//        notificationObject = new NotificationsGenerator();
     }
 
     @FXML
-    void loginBtnClicked(ActionEvent event) throws SQLException, IOException, InterruptedException {
-        operatorName = userIDTf_ID.getText();
-        String operatorPass = passwordTf_ID.getText();
+    void loginBtnClicked(ActionEvent event) throws SQLException, IOException {
 
-        LoginDAO loginDAOObj = new LoginDAO();
+        operatorName = userIDTf_ID.getText();
+        operatorPass = passwordTf_ID.getText();
+
+        System.out.println("Logging in with credentials: " + operatorName + ", " + operatorPass);
 
         /** Validates user from database **/
         isValidUser = loginDAOObj.authenticateUser(operatorName, operatorPass);
@@ -50,6 +59,7 @@ public class LoginController {
 
         /** If user is valid then load the next window */
         if(isValidUser){
+            System.out.println("Successfully Logged in");
             Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("NavigationPanelView.fxml"))));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
@@ -61,6 +71,7 @@ public class LoginController {
             stage.show();
 
         }else{
+            System.out.println("Unsuccessful Login attempt");
             invalidUserLb_ID.setVisible(true);
         }
 
