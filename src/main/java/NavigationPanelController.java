@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Window;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
@@ -17,7 +18,7 @@ import java.awt.image.DataBufferByte;
 import java.io.IOException;
 
 
-public class NavigationPanelController {
+public class NavigationPanelController extends Thread {
 
     public TextArea systemLogTA_ID;
     public TextField opName_ID;
@@ -28,9 +29,6 @@ public class NavigationPanelController {
     public TextField weatherRtf_ID;
     public Button backTrack_btn;
 
-    public NavigationPanelController() throws IOException {
-    }
-
     /**
      * Initialize Value
      * */
@@ -40,11 +38,6 @@ public class NavigationPanelController {
 
         /** Sets operator name fetching from user_ID field from login */
         opName_ID.setText( LoginController.operatorName );
-
-        /** Battery of laptop showing here can be replaced with vehicles battery */
-        Kernel32.SYSTEM_POWER_STATUS batteryStatus = new Kernel32.SYSTEM_POWER_STATUS();
-        Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
-        batteryLife_ID.setText(batteryStatus.toString());
 
 
         /** Turn on Video Cam */
@@ -57,28 +50,50 @@ public class NavigationPanelController {
             e.printStackTrace();
         }
 
-        /** Get weather data */
-        try{
-
-            System.out.println("Attempting to get weather data");
-
-            /** Gets Latitude and Longitude */
-            String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
-            String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
-
-            /** Call Weather api for weather data */
-            String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
-            weatherRtf_ID.setText( currentWeather );
-            System.out.println("Successfully fetched weather data");
-
-        }catch(Exception e){
-            weatherRtf_ID.setText("N/A");
-            System.out.println("Couldn't fetch weather data");
-            e.printStackTrace();
-        }
+        /** Calling thread for periodically checking on battery and weather in eevry 2 minutes */
+        start();
 
     }
 
+    /** This thread checks for battery and weather in every 2 minutes */
+    public void run(){
+
+        while(true){
+            try {
+                System.out.println("System: Checking battery Percentage");
+                /** Battery of laptop showing here can be replaced with vehicles battery */
+                Kernel32.SYSTEM_POWER_STATUS batteryStatus = new Kernel32.SYSTEM_POWER_STATUS();
+                Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
+                batteryLife_ID.setText(batteryStatus.toString());
+
+                /** Get weather data */
+                try{
+
+                    System.out.println("Location: Attempting to get weather data");
+
+                    /** Gets Latitude and Longitude */
+                    String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
+                    String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
+
+                    /** Call Weather api for weather data */
+                    String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
+                    weatherRtf_ID.setText( currentWeather );
+                    System.out.println("Location: Successfully fetched weather data");
+
+                }catch(Exception e){
+                    weatherRtf_ID.setText("N/A");
+                    System.out.println("Location: Couldn't fetch weather data");
+                    e.printStackTrace();
+                }
+
+                sleep(120000);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 
     /**
      * Calculating for How long key was pressed
@@ -91,7 +106,6 @@ public class NavigationPanelController {
     /**
      * System time when key was pressed
      * */
-
     public void arrowKeyStrokesHandler(KeyEvent keyEvent) {
         currKey = keyEvent.getCode();
         if(currKey != lastKey){
@@ -116,6 +130,8 @@ public class NavigationPanelController {
             }
             else if(currKey == KeyCode.TAB){ // Capture Photo
                 backtrackBtnClicked();
+            }else if(currKey == KeyCode.ESCAPE){
+                System.exit(0);
             }
         }
     }
@@ -258,9 +274,6 @@ public class NavigationPanelController {
         /** Responsible for creating blended heatChart with maps*/
         new MapBlender().combineHeatmapWithGoogleMap();
 
-        /** Periodically check for battery status after each key release*/
-        batteryStatusChecker();
-
     }
 
     /**
@@ -293,14 +306,6 @@ public class NavigationPanelController {
 
     }
 
-    /**
-     * Battery of laptop/vehicle displayed here
-     * */
-    private void batteryStatusChecker(){
-        Kernel32.SYSTEM_POWER_STATUS batteryStatus = new Kernel32.SYSTEM_POWER_STATUS();
-        Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
-        batteryLife_ID.setText(batteryStatus.toString());
-    }
 
     /**
      * Capture Images from default camera and sent to ImageProcessor
