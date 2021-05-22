@@ -2,8 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /** This class is responsible for fetching latitude and longitude of machine using public IP of the machine */
 public class LocalMapGenerator {
@@ -39,15 +37,22 @@ public class LocalMapGenerator {
 
     /** Retrieves the json values of Latitude and longitude from the URL */
     private static String latlongJsonValueRetriever(URL urlName) throws IOException {
-        BufferedReader reader = new BufferedReader( new InputStreamReader( urlName.openStream() ) );
 
         String line = null;
-        while ( reader.ready() ){
-            line = reader.readLine().trim();
-        }
-        reader.close();
-        return line;
 
+        try{
+            BufferedReader reader = new BufferedReader( new InputStreamReader( urlName.openStream() ) );
+
+
+            while ( reader.ready() ){
+                line = reader.readLine().trim();
+            }
+            reader.close();
+
+        }catch( Exception e){
+            System.out.println(" Error: 429, IPAPI not replying");
+        }
+        return line;
     }
 
     /** Get Weather Data */
@@ -57,8 +62,6 @@ public class LocalMapGenerator {
                 "&exclude=daily,minutely,hourly" +
                 "&appid=" + Constants.weatherAPI_key);
 
-        System.out.println("Weather URL: " + urlForWeather);
-
         String weatherJson = weatherJsonValueRetriever(urlForWeather);
         String mainWeather = dominantWeatherFinder( weatherJson );
         return mainWeather;
@@ -66,23 +69,33 @@ public class LocalMapGenerator {
 
     /** Retrieves the json values of weather from the URL */
     private static String weatherJsonValueRetriever(URL urlName) throws IOException {
-        BufferedReader reader = new BufferedReader( new InputStreamReader( urlName.openStream() ) );
 
         String line = null;
-        while ( reader.ready() ){
-            line = reader.readLine().trim();
+        try{
+            BufferedReader reader = new BufferedReader( new InputStreamReader( urlName.openStream() ) );
+
+            while ( reader.ready() ){
+                line = reader.readLine().trim();
+            }
+            reader.close();
+        }catch(Exception e){
+            System.out.println("Error: 400, No weather data without latitude longitude");
         }
-        reader.close();
+
+
         return line;
     }
 
     /** Get main weather of that hour */
     private static String dominantWeatherFinder( String weatherJson ){
 
-        int indexOfMain =  weatherJson.lastIndexOf("id");
-        String weatherID = weatherJson.substring(indexOfMain+4, indexOfMain+7);
-
-        System.out.println("Weather ID:" + weatherID);
+        String weatherID = "-1";
+        try{
+            int indexOfMain =  weatherJson.lastIndexOf("id");
+             weatherID = weatherJson.substring(indexOfMain+4, indexOfMain+7);
+        }catch (Exception e){
+            System.out.println("Null error data");
+        }
 
         return Constants.getWeatherReport(weatherID);
 

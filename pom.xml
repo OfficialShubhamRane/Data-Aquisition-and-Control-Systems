@@ -64,20 +64,6 @@
             <version>5.4.28.Final</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.bytedeco.javacpp-presets/opencv -->
-        <dependency>
-            <groupId>org.bytedeco.javacpp-presets</groupId>
-            <artifactId>opencv</artifactId>
-            <version>4.0.1-1.4.4</version>
-        </dependency>
-
-        <!-- Sarxos library to capture video from webcam and process image-->
-        <dependency>
-            <groupId>com.github.sarxos</groupId>
-            <artifactId>webcam-capture</artifactId>
-            <version>0.3.12</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
         <dependency>
             <groupId>net.java.dev.jna</groupId>
@@ -85,40 +71,13 @@
             <version>5.5.0</version>
         </dependency>
 
-        <!--    Get latitude and logitude     -->
-        <!-- https://mvnrepository.com/artifact/com.maxmind.geoip2/geoip2 -->
+        <!-- https://mvnrepository.com/artifact/com.github.sarxos/webcam-capture -->
         <dependency>
-            <groupId>com.maxmind.geoip2</groupId>
-            <artifactId>geoip2</artifactId>
-            <version>2.12.0</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
+            <groupId>com.github.sarxos</groupId>
+            <artifactId>webcam-capture</artifactId>
+            <version>0.3.12</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/jfree/jfreechart -->
-        <dependency>
-            <groupId>jfree</groupId>
-            <artifactId>jfreechart</artifactId>
-            <version>1.0.13</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.8.0-alpha2</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.openpnp/opencv -->
-        <dependency>
-            <groupId>org.openpnp</groupId>
-            <artifactId>opencv</artifactId>
-            <version>4.5.1-0</version>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.controlsfx/controlsfx -->
         <dependency>

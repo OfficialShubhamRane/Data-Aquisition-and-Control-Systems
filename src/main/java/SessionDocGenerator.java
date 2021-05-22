@@ -1,6 +1,3 @@
-
-
-
 /** This class is tend to generate logs of each session of system use with great details **/
 public class SessionDocGenerator {
 

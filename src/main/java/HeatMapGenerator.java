@@ -2,7 +2,6 @@
 
 //import org.tc33.jheatchart.HeatChart;
 //
-import org.tc33.jheatchart.HeatChart;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +13,8 @@ public class HeatMapGenerator {
 
     /** Creating heatChart for visualizing vehicle movements */
     private static final double[][] heatChartData = new double[41][41];
-    /** Start point is 11,11 index */
+
+    /** Start point is 20.5,20.5 index */
     private static final double i = heatChartData.length / 2.0;
     private static final double j = i;
 
@@ -49,8 +49,8 @@ public class HeatMapGenerator {
 
         double m = ori_i;
         double n = ori_j;
-        System.out.println("ori_i : " + ori_i + "ori_j : " + ori_j);
-        System.out.println("desti_i : " + desti_i + "desti_j : " + desti_j);
+//        System.out.println("ori_i : " + ori_i + "ori_j : " + ori_j);
+//        System.out.println("desti_i : " + desti_i + "desti_j : " + desti_j);
 
         /** Forward marking **/
         while(m > desti_i && direction.equals("Forward")){

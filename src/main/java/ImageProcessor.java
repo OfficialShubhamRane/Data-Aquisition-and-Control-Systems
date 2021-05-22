@@ -46,6 +46,7 @@ public class ImageProcessor {
             Imgproc.rectangle(capturedMat, face.tl(), face.br(), new Scalar(0, 0, 255), 3);
         }
         if(isCaptureClicked){
+            System.out.println("Camera: Attempting to store captured Image");
             writeFaceDetectedImg(capturedMat, Constants.save_capturedPhotoDirectory);
         }
         return capturedMat;
@@ -54,7 +55,7 @@ public class ImageProcessor {
     /** Writing face detected image on specified path */
     static int pictureId = 1;
     public static void writeFaceDetectedImg(Mat srcImage, String targetImagePath) {
-        System.out.println("Entered to write images");
+        System.out.println("Camera: Successfully storing captures Image");
         Imgcodecs.imwrite(targetImagePath + pictureId +".jpg", srcImage);
 
         pictureId++;
@@ -79,6 +80,7 @@ public class ImageProcessor {
 
     /** Temporarily stops video capture to click photo */
     public static void stopCapture(){
+        System.out.println("Camera: Video releasing camera resource");
         NavigationPanelController.capture.release();
     }
 
