@@ -17,7 +17,7 @@ public class MapBlender {
         src1 = Imgcodecs.imread(Constants.heatMapImage);        // value of alpha
 
         GoogleMapGenerator.googleMapImageGetter();
-        src2 = Imgcodecs.imread(Constants.googleMapsImage);     // value of Beta
+        src2 = Imgcodecs.imread(Constants.googleMapsImage);     // value of beta
 
         /** This method generates result image in dst matrix */
         Core.addWeighted( src1, alpha, src2, beta, 0.0, dst);

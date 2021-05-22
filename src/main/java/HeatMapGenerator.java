@@ -2,7 +2,6 @@
 
 //import org.tc33.jheatchart.HeatChart;
 //
-import org.tc33.jheatchart.HeatChart;
 
 import java.io.File;
 import java.io.IOException;

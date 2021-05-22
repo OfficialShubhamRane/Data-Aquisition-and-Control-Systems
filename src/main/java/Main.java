@@ -22,7 +22,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-
         Parent LoginView = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("LoginView.fxml")));
         /** Backdoor for testing */
 //        Parent LoginView = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("NavigationPanelView.fxml")));
@@ -39,6 +38,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
+        
 
     }
 }
