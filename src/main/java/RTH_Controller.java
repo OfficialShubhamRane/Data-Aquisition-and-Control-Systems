@@ -4,16 +4,6 @@ import java.util.Stack;
 public class RTH_Controller {
 
     /** Create a Data structure to hold Body movement commands */
-    public String[][] logTableGenerator(int noOfCommands){
-
-        String[][] logTable = new String[noOfCommands][2];
-
-        return logTable;
-    }
-
-
-
-
 
     /** Push every body movement done by machine in stack as a log*/
 

@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Window;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
@@ -34,7 +33,7 @@ public class NavigationPanelController extends Thread {
      * */
     public void initialize() {
 
-        System.out.println( "Setting up : Operator name, Battery, Camera, Weather data");
+        System.out.println( "Setting up : Operator name");
 
         /** Sets operator name fetching from user_ID field from login */
         opName_ID.setText( LoginController.operatorName );
@@ -43,52 +42,56 @@ public class NavigationPanelController extends Thread {
         /** Turn on Video Cam */
         try{
             turnOnVideoCam();
-            System.out.println("Camera: Camera Successfully Started");
+            System.out.println("Camera: Successfully Started Camera");
 
         }catch (Exception e){
-            System.out.println("Camera: Camera Failed to Start");
+            System.out.println("Camera: Failed to Start Camera");
             e.printStackTrace();
         }
 
-        /** Calling thread for periodically checking on battery and weather in eevry 2 minutes */
-        start();
+//        /** Calling thread to periodically check on weather in every 2 minutes */
+//        WeatherThread weatherThreadObj = new WeatherThread();
+//        weatherThreadObj.start();
+//
+//        /** Calling thread to periodically check on battery in every 1 minutes */
+//        BatteryThread batteryThreadObj = new BatteryThread();
+//        batteryThreadObj.start();
 
+        /** Calling thread to periodically check on weather in every 1 minutes */
+        start();
     }
 
-    /** This thread checks for battery and weather in every 2 minutes */
+    @Override
     public void run(){
 
-        while(true){
-            try {
+        while( true ){
+
+            /** Get System data */
+            try{
+
                 System.out.println("System: Checking battery Percentage");
+
                 /** Battery of laptop showing here can be replaced with vehicles battery */
                 Kernel32.SYSTEM_POWER_STATUS batteryStatus = new Kernel32.SYSTEM_POWER_STATUS();
                 Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
                 batteryLife_ID.setText(batteryStatus.toString());
 
-                /** Get weather data */
-                try{
+                System.out.println("Location: Attempting to get weather data");
 
-                    System.out.println("Location: Attempting to get weather data");
+                /** Gets Latitude and Longitude */
+                String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
+                String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
 
-                    /** Gets Latitude and Longitude */
-                    String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
-                    String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
+                /** Call Weather api for weather data */
+                String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
+                weatherRtf_ID.setText( currentWeather );
+                System.out.println("Location: Successfully fetched weather data");
 
-                    /** Call Weather api for weather data */
-                    String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
-                    weatherRtf_ID.setText( currentWeather );
-                    System.out.println("Location: Successfully fetched weather data");
+                sleep(60000);
 
-                }catch(Exception e){
-                    weatherRtf_ID.setText("N/A");
-                    System.out.println("Location: Couldn't fetch weather data");
-                    e.printStackTrace();
-                }
-
-                sleep(120000);
-
-            } catch (InterruptedException e) {
+            }catch(Exception e){
+                weatherRtf_ID.setText("N/A");
+                System.out.println("Location: Couldn't fetch weather data");
                 e.printStackTrace();
             }
         }
@@ -131,6 +134,7 @@ public class NavigationPanelController extends Thread {
             else if(currKey == KeyCode.TAB){ // Capture Photo
                 backtrackBtnClicked();
             }else if(currKey == KeyCode.ESCAPE){
+                System.out.println("System: Closing the application");
                 System.exit(0);
             }
         }
