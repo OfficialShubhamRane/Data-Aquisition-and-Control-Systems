@@ -78,7 +78,6 @@ public class NavigationPanelController extends Thread {
                     /** Call Weather api for weather data */
                     String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
                     weatherRtf_ID.setText( currentWeather );
-                    System.out.println("Location: Successfully fetched weather data");
 
                 }catch(Exception e){
                     weatherRtf_ID.setText("N/A");
@@ -130,7 +129,8 @@ public class NavigationPanelController extends Thread {
             }
             else if(currKey == KeyCode.TAB){ // Capture Photo
                 backtrackBtnClicked();
-            }else if(currKey == KeyCode.ESCAPE){
+            }
+            else if(currKey == KeyCode.ESCAPE){ // Exits the system
                 System.exit(0);
             }
         }
@@ -252,10 +252,6 @@ public class NavigationPanelController extends Thread {
             forwardTrackingLog.append("\n");
             backTrackingLog.append("\n");
         }
-
-        /** Resets and pushes each log on next line in systemLogs textfield*/
-
-        keyHeldDuration = 0;
 
         /** Depending upon status of track-backtrack toggle show system log contect*/
         if( !isBackTrackOn ){

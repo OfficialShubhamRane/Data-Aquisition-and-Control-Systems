@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * This class is responsible for creation, updating of heat signatures left by drones movement
+ * This class is responsible for creating, updating of heat chart of machine's movement
  * **/
 public class HeatMapGenerator {
 

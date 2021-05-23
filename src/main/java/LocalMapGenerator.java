@@ -43,14 +43,13 @@ public class LocalMapGenerator {
         try{
             BufferedReader reader = new BufferedReader( new InputStreamReader( urlName.openStream() ) );
 
-
             while ( reader.ready() ){
                 line = reader.readLine().trim();
             }
             reader.close();
 
         }catch( Exception e){
-            System.out.println(" Error: 429, IPAPI not replying");
+            System.out.println("Error: 429, IPAPI not replying");
         }
         return line;
     }
@@ -100,7 +99,5 @@ public class LocalMapGenerator {
         return Constants.getWeatherReport(weatherID);
 
     }
-
-
 
 }
