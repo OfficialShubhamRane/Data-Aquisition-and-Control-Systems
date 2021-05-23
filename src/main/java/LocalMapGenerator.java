@@ -7,20 +7,20 @@ import java.net.*;
 public class LocalMapGenerator {
 
     /** Retrieves public IP address of machine */
-    public static String publicIP_Finder() {
+    public static void publicIP_Finder() {
 
-        String public_IP;
         try
         {
             URL url_name = new URL("http://bot.whatismyipaddress.com");
             BufferedReader sc = new BufferedReader(new InputStreamReader( url_name.openStream() ) );
-            public_IP = sc.readLine().trim();
+
+            NavigationPanelController.public_IP = sc.readLine().trim();
         }
         catch (Exception e)
         {
-            public_IP = "Cannot Execute Properly";
+            System.out.println("Location: Cannot fetch public IP of the system");
         }
-        return public_IP;
+
     }
 
     /** Fetches Latitude of the machine */
@@ -43,14 +43,13 @@ public class LocalMapGenerator {
         try{
             BufferedReader reader = new BufferedReader( new InputStreamReader( urlName.openStream() ) );
 
-
             while ( reader.ready() ){
                 line = reader.readLine().trim();
             }
             reader.close();
 
         }catch( Exception e){
-            System.out.println(" Error: 429, IPAPI not replying");
+//            System.out.println("Location: Error: 429, IPAPI not replying");
         }
         return line;
     }
@@ -79,7 +78,7 @@ public class LocalMapGenerator {
             }
             reader.close();
         }catch(Exception e){
-            System.out.println("Error: 400, No weather data without latitude longitude");
+            System.out.println("Location: Error 400, No weather data without latitude longitude");
         }
 
 
@@ -94,7 +93,7 @@ public class LocalMapGenerator {
             int indexOfMain =  weatherJson.lastIndexOf("id");
              weatherID = weatherJson.substring(indexOfMain+4, indexOfMain+7);
         }catch (Exception e){
-            System.out.println("Null error data");
+            System.out.println("Location: No weather data available");
         }
 
         return Constants.getWeatherReport(weatherID);

@@ -27,6 +27,7 @@ public class NavigationPanelController extends Thread {
     public ImageView imageView_ID;
     public TextField weatherRtf_ID;
     public Button backTrack_btn;
+    public static String public_IP;
 
     /**
      * Initialize Value
@@ -49,13 +50,10 @@ public class NavigationPanelController extends Thread {
             e.printStackTrace();
         }
 
-//        /** Calling thread to periodically check on weather in every 2 minutes */
-//        WeatherThread weatherThreadObj = new WeatherThread();
-//        weatherThreadObj.start();
-//
-//        /** Calling thread to periodically check on battery in every 1 minutes */
-//        BatteryThread batteryThreadObj = new BatteryThread();
-//        batteryThreadObj.start();
+        /** fetch and set public IP of the system */
+        LocalMapGenerator.publicIP_Finder();
+        System.out.println( public_IP );
+
 
         /** Calling thread to periodically check on weather in every 1 minutes */
         start();
@@ -79,8 +77,8 @@ public class NavigationPanelController extends Thread {
                 System.out.println("Location: Attempting to get weather data");
 
                 /** Gets Latitude and Longitude */
-                String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
-                String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
+                String latitude = LocalMapGenerator.latitudeGetter( NavigationPanelController.public_IP );
+                String longitude = LocalMapGenerator.longitudeGetter( NavigationPanelController.public_IP );
 
                 /** Call Weather api for weather data */
                 String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
@@ -133,7 +131,8 @@ public class NavigationPanelController extends Thread {
             }
             else if(currKey == KeyCode.TAB){ // Capture Photo
                 backtrackBtnClicked();
-            }else if(currKey == KeyCode.ESCAPE){
+            }
+            else if(currKey == KeyCode.ESCAPE){
                 System.out.println("System: Closing the application");
                 System.exit(0);
             }
@@ -359,4 +358,43 @@ public class NavigationPanelController extends Thread {
         System.out.println("Camera: Successfully acquired camera resource for video streaming");
     }
 
+}
+
+class Weather_battey_Thread extends Thread {
+
+    NavigationPanelController navigationPanelController = new NavigationPanelController();
+    @Override
+    public void run(){
+
+        System.out.println("System: Checking battery Percentage");
+        /** Battery of laptop showing here can be replaced with vehicles battery */
+        Kernel32.SYSTEM_POWER_STATUS batteryStatus = new Kernel32.SYSTEM_POWER_STATUS();
+        Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
+        navigationPanelController.batteryLife_ID.setText( batteryStatus.toString() );
+
+        while( true ){
+
+            /** Get System data */
+            try{
+
+                System.out.println("Location: Attempting to get weather data");
+
+                /** Gets Latitude and Longitude */
+                String latitude = LocalMapGenerator.latitudeGetter( NavigationPanelController.public_IP );
+                String longitude = LocalMapGenerator.longitudeGetter( NavigationPanelController.public_IP );
+
+                /** Call Weather api for weather data */
+                String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
+                navigationPanelController.weatherRtf_ID.setText( currentWeather );
+
+                sleep(60000);
+
+            }catch(Exception e){
+//                navigationPanelController.weatherRtf_ID.setText("N/A");
+                System.out.println("Location: Couldn't fetch weather data");
+                e.printStackTrace();
+            }
+        }
+
+    }
 }

@@ -17,8 +17,8 @@ public class GoogleMapGenerator {
         /** My perfect co-ordinates are: 40.75028544,-74.04422841 */
         try{
 
-            String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
-            String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
+            String latitude = LocalMapGenerator.latitudeGetter( NavigationPanelController.public_IP );
+            String longitude = LocalMapGenerator.longitudeGetter( NavigationPanelController.public_IP );
             urlForMap  = new URL("https://maps.googleapis.com/maps/api/staticmap?center="+ latitude +","+ longitude +"&zoom=19&size=883x904&maptype=satellite&key="
                     + Constants.googleMapAPI_key);
 
@@ -27,7 +27,7 @@ public class GoogleMapGenerator {
         }catch ( IOException ie ){
             /** URL with hard coded lat and long for the moments when lat & long API is not responding*/
             urlForMap  = new URL(Constants.congressStreetHardCoded_Link + Constants.googleMapAPI_key);
-            System.out.println(" Latitude-Longitude API not responding");
+            System.out.println("Location: Latitude-Longitude API not responding");
         }
 
         InputStream is = urlForMap.openStream();
