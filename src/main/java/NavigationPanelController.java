@@ -86,7 +86,7 @@ public class NavigationPanelController extends Thread {
                 /** Call Weather api for weather data */
                 String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
                 weatherRtf_ID.setText( currentWeather );
-                System.out.println("Location: Successfully fetched weather data");
+                System.out.println("Location: Completed fetching weather data");
 
                 sleep(60000);
 
@@ -298,10 +298,8 @@ public class NavigationPanelController extends Thread {
     float movedDistance = 0;
     double vehicleSpeed = 5.0; // 50 miles per hour
     private void totalDistanceTravelled(){
-
         movedDistance = (float) ( (vehicleSpeed / 360.0) * secondsTravelled);
         distanceCovered_ID.setText(String.valueOf(movedDistance));
-
     }
 
     /**

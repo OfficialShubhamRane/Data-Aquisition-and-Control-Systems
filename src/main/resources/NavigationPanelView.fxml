@@ -100,6 +100,7 @@
    <TextArea fx:id="systemLogTA_ID" editable="false" focusTraversable="false" layoutX="611.0" layoutY="51.0" prefHeight="276.0" prefWidth="200.0" promptText="System Log will be printed here." />
    <Label focusTraversable="false" layoutX="676.0" layoutY="340.0" text="Trace Back:" underline="true" />
    <Button fx:id="backTrack_btn" focusTraversable="false" layoutX="609.0" layoutY="365.0" mnemonicParsing="false" onAction="#backtrackBtnClicked" prefHeight="32.0" prefWidth="102.0" text="Manual (TAB)" />
-   <Button fx:id="traceback_btn" focusTraversable="false" layoutX="717.0" layoutY="365.0" mnemonicParsing="false" onAction="#traceBackBtnClicked" prefHeight="32.0" prefWidth="102.0" text="Auto (T)" />
+   <Button fx:id="traceback_btn" accessibleText="Gets rover back to orignal position" focusTraversable="false" layoutX="717.0" layoutY="365.0" mnemonicParsing="false" onAction="#traceBackBtnClicked" prefHeight="32.0" prefWidth="102.0" text="Auto (T)" textFill="RED" />
    <Text layoutX="715.0" layoutY="528.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Shubham Rane" />
+   <Text layoutX="14.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Close Program: (ESC)" />
 </AnchorPane>

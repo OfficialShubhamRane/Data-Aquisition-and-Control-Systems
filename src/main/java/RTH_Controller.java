@@ -25,30 +25,29 @@ public class RTH_Controller {
 
     public static void traceBackController() throws IOException {
 
+        NavigationPanelController navigationPanelControllerObj = new NavigationPanelController();
         String direction = "Forward";
+        long expectedEAT  = 0;
 
         while (!traceBackStack.empty()) {
             String currPath = traceBackStack.pop();
 
             if (currPath.contains("F")){
-                System.out.println("Forward" + currPath.substring(1));
                 direction = "Forward";
 
             }else if (currPath.contains("R")){
-                System.out.println("Right" + currPath.substring(1));
                 direction = "Right";
 
             }else if (currPath.contains("B")){
-                System.out.println("Reverse" + currPath.substring(1));
                 direction = "Reverse";
 
             }else if (currPath.contains("L")){
-                System.out.println("Left" + currPath.substring(1));
                 direction = "Left";
-
             }
 
             long distance = Long.parseLong(currPath.substring(1));
+            System.out.println( direction + " " + distance);
+            expectedEAT += distance;
 
             /** Sending data to heatMapGenerator class after each key release*/
             HeatMapGenerator.heatChartGenerator(direction, distance);
@@ -58,6 +57,8 @@ public class RTH_Controller {
             new MapBlender().combineHeatmapWithGoogleMap();
         }
 
+        System.out.println("Location: Auto-traceback initiated - EAT is " + expectedEAT + " seconds.");
+//        navigationPanelControllerObj.totalDistanceTravelledDoubler();
 
 
     }

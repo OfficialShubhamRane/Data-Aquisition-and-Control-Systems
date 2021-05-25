@@ -1,5 +1,6 @@
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
@@ -30,6 +31,16 @@ public class NotificationsGenerator {
         notificationBuilder.showInformation();
 
     }
+
+    public void alertBox(){
+        Alert a1 = new Alert(Alert.AlertType.NONE);
+        a1.setTitle("Hello");
+        a1.setContentText("Hahahahaha");
+        a1.setHeaderText(null);
+        a1.show();
+    }
+
+
 
 
 }
