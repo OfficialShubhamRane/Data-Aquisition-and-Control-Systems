@@ -2,6 +2,7 @@
 
 import com.github.sarxos.webcam.Webcam;
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -57,6 +58,8 @@ public class NavigationPanelController extends Thread {
 
         /** Calling thread to periodically check on weather in every 1 minutes */
         start();
+
+
     }
 
     @Override
@@ -107,7 +110,7 @@ public class NavigationPanelController extends Thread {
     /**
      * System time when key was pressed
      * */
-    public void arrowKeyStrokesHandler(KeyEvent keyEvent) {
+    public void arrowKeyStrokesHandler(KeyEvent keyEvent) throws IOException {
         currKey = keyEvent.getCode();
         if(currKey != lastKey){
             lastKey = currKey;
@@ -132,9 +135,11 @@ public class NavigationPanelController extends Thread {
             else if(currKey == KeyCode.TAB){ // Capture Photo
                 backtrackBtnClicked();
             }
-            else if(currKey == KeyCode.ESCAPE){
+            else if(currKey == KeyCode.ESCAPE){ // Exits the program
                 System.out.println("System: Closing the application");
                 System.exit(0);
+            }else if(currKey == KeyCode.T){ // Starts auto traceback
+                traceBackBtnClicked();
             }
         }
     }
@@ -169,6 +174,8 @@ public class NavigationPanelController extends Thread {
                 backTrackingLog.append("Reverse : ").append(keyHeldDuration / 1000).append(" sec ");
                 backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
 
+                RTH_Controller.traceBackStack.push("B" + keyHeldDuration / 1000);
+
                 direction = "Forward";
                 distance = keyHeldDuration / 1000;
 
@@ -189,6 +196,8 @@ public class NavigationPanelController extends Thread {
 
                 backTrackingLog.append("Right      : ").append(keyHeldDuration / 1000).append(" sec ");
                 backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
+
+                RTH_Controller.traceBackStack.push("R" + keyHeldDuration / 1000);
 
                 direction = "Left";
                 distance = keyHeldDuration / 1000;
@@ -211,6 +220,7 @@ public class NavigationPanelController extends Thread {
                 backTrackingLog.append("Forward : ").append(keyHeldDuration / 1000).append(" sec ");
                 backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
 
+                RTH_Controller.traceBackStack.push("F" + keyHeldDuration / 1000);
 
                 direction = "Reverse";
                 distance = keyHeldDuration / 1000;
@@ -232,6 +242,8 @@ public class NavigationPanelController extends Thread {
 
                 backTrackingLog.append("Left       : ").append(keyHeldDuration / 1000).append(" sec ");
                 backTrackingLog.append(keyHeldDuration % 1000).append(" millisec");
+
+                RTH_Controller.traceBackStack.push("L" + keyHeldDuration / 1000);
 
                 direction = "Right";
                 distance = keyHeldDuration / 1000;
@@ -358,43 +370,51 @@ public class NavigationPanelController extends Thread {
         System.out.println("Camera: Successfully acquired camera resource for video streaming");
     }
 
-}
-
-class Weather_battey_Thread extends Thread {
-
-    NavigationPanelController navigationPanelController = new NavigationPanelController();
-    @Override
-    public void run(){
-
-        System.out.println("System: Checking battery Percentage");
-        /** Battery of laptop showing here can be replaced with vehicles battery */
-        Kernel32.SYSTEM_POWER_STATUS batteryStatus = new Kernel32.SYSTEM_POWER_STATUS();
-        Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
-        navigationPanelController.batteryLife_ID.setText( batteryStatus.toString() );
-
-        while( true ){
-
-            /** Get System data */
-            try{
-
-                System.out.println("Location: Attempting to get weather data");
-
-                /** Gets Latitude and Longitude */
-                String latitude = LocalMapGenerator.latitudeGetter( NavigationPanelController.public_IP );
-                String longitude = LocalMapGenerator.longitudeGetter( NavigationPanelController.public_IP );
-
-                /** Call Weather api for weather data */
-                String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
-                navigationPanelController.weatherRtf_ID.setText( currentWeather );
-
-                sleep(60000);
-
-            }catch(Exception e){
-//                navigationPanelController.weatherRtf_ID.setText("N/A");
-                System.out.println("Location: Couldn't fetch weather data");
-                e.printStackTrace();
-            }
-        }
-
+    public void traceBackBtnClicked() throws IOException {
+        RTH_Controller.traceBackController();
     }
 }
+
+//class Weather_battey_Thread extends Thread {
+//
+//    NavigationPanelController navigationPanelController = new NavigationPanelController();
+//
+//    public String batteryData;
+//
+//    @Override
+//    public void run(){
+//
+//        System.out.println("System: Checking battery Percentage");
+//        /** Battery of laptop showing here can be replaced with vehicles battery */
+//        Kernel32.SYSTEM_POWER_STATUS batteryStatus = new Kernel32.SYSTEM_POWER_STATUS();
+//        Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
+//        batteryData = batteryStatus.toString();
+//
+////        navigationPanelController.batteryLife_ID.setText( batteryStatus.toString() );
+//
+////        while( true ){
+////
+////            /** Get System data */
+////            try{
+////
+////                System.out.println("Location: Attempting to get weather data");
+////
+////                /** Gets Latitude and Longitude */
+////                String latitude = LocalMapGenerator.latitudeGetter( NavigationPanelController.public_IP );
+////                String longitude = LocalMapGenerator.longitudeGetter( NavigationPanelController.public_IP );
+////
+////                /** Call Weather api for weather data */
+////                String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
+////                navigationPanelController.weatherRtf_ID.setText( currentWeather );
+////
+////                sleep(60000);
+////
+////            }catch(Exception e){
+//////                navigationPanelController.weatherRtf_ID.setText("N/A");
+////                System.out.println("Location: Couldn't fetch weather data");
+////                e.printStackTrace();
+////            }
+////        }
+//
+//    }
+//}
