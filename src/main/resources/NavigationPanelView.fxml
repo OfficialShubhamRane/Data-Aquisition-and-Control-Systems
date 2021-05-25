@@ -96,9 +96,10 @@
       </BorderPane>
    </Pane>
    <Separator focusTraversable="false" layoutX="603.0" layoutY="23.0" orientation="VERTICAL" prefHeight="508.0" prefWidth="0.0" />
-   <Label focusTraversable="false" layoutX="623.0" layoutY="38.0" text="Log Details" underline="true" />
-   <Button fx:id="backTrack_btn" focusTraversable="false" layoutX="711.0" layoutY="31.0" mnemonicParsing="false" onAction="#backtrackBtnClicked" prefHeight="32.0" prefWidth="114.0" text="Backtrack (TAB)" />
-   <TextArea fx:id="systemLogTA_ID" editable="false" focusTraversable="false" layoutX="623.0" layoutY="71.0" prefHeight="276.0" prefWidth="200.0" promptText="System Log will be printed here." />
-   <Text layoutX="14.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Shubham Rane" />
-   <Button fx:id="traceback_btn" focusTraversable="false" layoutX="623.0" layoutY="361.0" mnemonicParsing="false" onAction="#traceBackBtnClicked" text="Auto-Traceback(T)" />
+   <Label layoutX="676.0" layoutY="33.0" text="Log Details:" />
+   <TextArea fx:id="systemLogTA_ID" editable="false" focusTraversable="false" layoutX="611.0" layoutY="51.0" prefHeight="276.0" prefWidth="200.0" promptText="System Log will be printed here." />
+   <Label focusTraversable="false" layoutX="676.0" layoutY="340.0" text="Trace Back:" underline="true" />
+   <Button fx:id="backTrack_btn" focusTraversable="false" layoutX="609.0" layoutY="365.0" mnemonicParsing="false" onAction="#backtrackBtnClicked" prefHeight="32.0" prefWidth="102.0" text="Manual (TAB)" />
+   <Button fx:id="traceback_btn" focusTraversable="false" layoutX="717.0" layoutY="365.0" mnemonicParsing="false" onAction="#traceBackBtnClicked" prefHeight="32.0" prefWidth="102.0" text="Auto (T)" />
+   <Text layoutX="715.0" layoutY="528.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Shubham Rane" />
 </AnchorPane>

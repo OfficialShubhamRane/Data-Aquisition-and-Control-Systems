@@ -6,8 +6,6 @@ public class RTH_Controller {
 
     /** Create a Data structure to hold Body movement commands */
 
-
-
     /** Push every body movement done by machine in stack as a log*/
 
     /** For backtracking Pop actions out of Stack */
