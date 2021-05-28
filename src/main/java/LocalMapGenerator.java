@@ -96,13 +96,14 @@ public class LocalMapGenerator {
 
         String weatherID = "-1";
         try{
-            int indexOfMain =  weatherJson.lastIndexOf("id");
-             weatherID = weatherJson.substring(indexOfMain+4, indexOfMain+7);
+            int indexOfMain =  weatherJson.indexOf("\"id\":");
+             weatherID = weatherJson.substring(indexOfMain+5, indexOfMain+8);
              System.out.println("indexOfMain :" + indexOfMain);
         }catch (Exception e){
             System.out.println("Location: No weather data available");
         }
         System.out.println("Weather ID: " + weatherID);
+        System.out.println("weather id length: " + weatherID.length());
         return Constants.getWeatherReport(weatherID);
 
     }

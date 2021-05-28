@@ -42,13 +42,7 @@ public class NavigationPanelController extends Thread {
         opName_ID.setText( LoginController.operatorName );
 
         /** Creating dedicated file for current session */
-        File sessionFile = new File("src/SessionData/Session_1");
-        boolean isfileCreated = sessionFile.mkdir();
-        if (isfileCreated) {
-            System.out.println("System: Successfully created new directory for session data");
-        }else{
-            System.out.println("System: Un-successful in creating new directory for session data");
-        }
+        SessionDocGenerator.directoryGenerator();
 
 
         /** Turn on Video Cam */
