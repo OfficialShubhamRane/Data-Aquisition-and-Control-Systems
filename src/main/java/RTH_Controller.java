@@ -46,7 +46,6 @@ public class RTH_Controller {
             }
 
             long distance = Long.parseLong(currPath.substring(1));
-            System.out.println( direction + " " + distance);
             expectedEAT += distance;
 
             /** Sending data to heatMapGenerator class after each key release*/
@@ -58,7 +57,6 @@ public class RTH_Controller {
         }
 
         System.out.println("Location: Auto-traceback initiated - EAT is " + expectedEAT + " seconds.");
-//        navigationPanelControllerObj.totalDistanceTravelledDoubler();
 
 
     }

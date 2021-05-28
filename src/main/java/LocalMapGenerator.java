@@ -61,8 +61,14 @@ public class LocalMapGenerator {
                 "&exclude=daily,minutely,hourly" +
                 "&appid=" + Constants.weatherAPI_key);
 
+//        System.out.println(" ######## Testing weather URL IN Working ######## ");
+//        URL testUrlForWeather = new URL(Constants.testWeatherAPI);
+//        String weatherJson = weatherJsonValueRetriever(testUrlForWeather);
+
         String weatherJson = weatherJsonValueRetriever(urlForWeather);
+        System.out.println("weatherJson: " + weatherJson);
         String mainWeather = dominantWeatherFinder( weatherJson );
+        System.out.println("mainWeather: " + mainWeather);
         return mainWeather;
     }
 
@@ -92,10 +98,11 @@ public class LocalMapGenerator {
         try{
             int indexOfMain =  weatherJson.lastIndexOf("id");
              weatherID = weatherJson.substring(indexOfMain+4, indexOfMain+7);
+             System.out.println("indexOfMain :" + indexOfMain);
         }catch (Exception e){
             System.out.println("Location: No weather data available");
         }
-
+        System.out.println("Weather ID: " + weatherID);
         return Constants.getWeatherReport(weatherID);
 
     }

@@ -15,6 +15,7 @@ import org.opencv.videoio.VideoCapture;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.io.File;
 import java.io.IOException;
 
 
@@ -35,10 +36,19 @@ public class NavigationPanelController extends Thread {
      * */
     public void initialize() {
 
-        System.out.println( "Setting up : Operator name");
+        System.out.println( "Setting up Controls and Data Acquisition Window...");
 
         /** Sets operator name fetching from user_ID field from login */
         opName_ID.setText( LoginController.operatorName );
+
+        /** Creating dedicated file for current session */
+        File sessionFile = new File("src/SessionData/Session_1");
+        boolean isfileCreated = sessionFile.mkdir();
+        if (isfileCreated) {
+            System.out.println("System: Successfully created new directory for session data");
+        }else{
+            System.out.println("System: Un-successful in creating new directory for session data");
+        }
 
 
         /** Turn on Video Cam */
@@ -53,7 +63,7 @@ public class NavigationPanelController extends Thread {
 
         /** fetch and set public IP of the system */
         LocalMapGenerator.publicIP_Finder();
-        System.out.println( public_IP );
+        System.out.println( "System: Public IP: " + public_IP );
 
 
         /** Calling thread to periodically check on weather in every 1 minutes */
@@ -82,9 +92,11 @@ public class NavigationPanelController extends Thread {
                 /** Gets Latitude and Longitude */
                 String latitude = LocalMapGenerator.latitudeGetter( NavigationPanelController.public_IP );
                 String longitude = LocalMapGenerator.longitudeGetter( NavigationPanelController.public_IP );
+                System.out.println("Latitude: " + latitude + "Longitude: " + longitude);
 
                 /** Call Weather api for weather data */
                 String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
+                System.out.println( "Current Weather: " + currentWeather );
                 weatherRtf_ID.setText( currentWeather );
                 System.out.println("Location: Completed fetching weather data");
 
@@ -96,7 +108,6 @@ public class NavigationPanelController extends Thread {
                 e.printStackTrace();
             }
         }
-
     }
 
     /**

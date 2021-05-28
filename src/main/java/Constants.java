@@ -11,21 +11,21 @@ public class Constants {
     final public static String PASSWORD = "1234";
 
     final public static String frontalFaceCascadeDirectory = "src/main/resources/haarcascade_frontalface_alt.xml";
-    final public static String save_capturedPhotoDirectory = "src/SessionData/faceDetected_img";
+    final public static String save_capturedPhotoDirectory = "src/SessionData/Session_1/faceDetected_img";
 
-    final public static String save_heatMapDirectory = "src/SessionData/navigation-heatChart.png";
-    final public static String heatMapImage = "src/SessionData/navigation-heatChart.png";
+    final public static String save_heatMapDirectory = "src/SessionData/Session_1/navigation-heatChart.png";
+    final public static String heatMapImage = "src/SessionData/Session_1/navigation-heatChart.png";
 
     // final public static String googleMapsImage = "src/main/resources/GoogleMaps_WashingtonPark.png";
     final public static String googleMapsImage = "src/main/resources/GoogleMaps.png";
-    final public static String blendedHeatMap = "src/SessionData/blendedNavHeatChart.png";
+    final public static String blendedHeatMap = "src/SessionData/Session_1/blendedNavHeatChart.png";
     // My perfect co-ordinates are: 40.75028544,-74.04422841
     final public static String congressStreetHardCoded_Link = "https://maps.googleapis.com/maps/api/staticmap?center=40.75028544,-74.04422841&zoom=19&size=883x904&maptype=satellite&key=";
 
-
+    final public static String testWeatherAPI = "https://api.openweathermap.org/data/2.5/onecall?lat=40.75028544&long=-74.04422841&unit=metric&exclude=daily,minutely,hourly&appid=4a35f0f50ffdfc2aaa5966bbcec3f638";
 
     /** Holds weather ID  and weather Description mapping */
-    public static String getWeatherReport(String weatherID){
+    public static String getWeatherReport(String weatherID) {
 
         Map<String, String> weatherMap = new HashMap<>();
 
