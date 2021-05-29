@@ -49,11 +49,7 @@ public class LocalMapGenerator {
             reader.close();
 
         }catch( Exception e){
-<<<<<<< HEAD
-            System.out.println("Error: 429, IPAPI not replying");
-=======
-//            System.out.println("Location: Error: 429, IPAPI not replying");
->>>>>>> dev_1
+//          System.out.println("Location: Error: 429, IPAPI not replying");
         }
         return line;
     }

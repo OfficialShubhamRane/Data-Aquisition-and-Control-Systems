@@ -83,9 +83,6 @@ public class NavigationPanelController extends Thread {
 
                 System.out.println("Location: Attempting to get weather data");
 
-                /** Call Weather api for weather data */
-                String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
-                weatherRtf_ID.setText(currentWeather);
                 /** Gets Latitude and Longitude */
                 String latitude = LocalMapGenerator.latitudeGetter(NavigationPanelController.public_IP);
                 String longitude = LocalMapGenerator.longitudeGetter(NavigationPanelController.public_IP);
@@ -120,28 +117,27 @@ public class NavigationPanelController extends Thread {
      */
     public void arrowKeyStrokesHandler(KeyEvent keyEvent) throws IOException {
         currKey = keyEvent.getCode();
-        if (currKey != lastKey) {
-            lastKey = currKey;
-            if (currKey == KeyCode.W) { // UP
-                keyPressedSystemTime = System.currentTimeMillis();
-            } else if (currKey == KeyCode.D) { // RIGHT
-                keyPressedSystemTime = System.currentTimeMillis();
-            } else if (currKey == KeyCode.A) { // LEFT
-                keyPressedSystemTime = System.currentTimeMillis();
-            } else if (currKey == KeyCode.S) { // DOWN/BACK
-                keyPressedSystemTime = System.currentTimeMillis();
-            } else if (currKey == KeyCode.SPACE) { // Stop/Space
-                keyPressedSystemTime = System.currentTimeMillis();
-            } else if (currKey == KeyCode.E) { // Capture Photo
-                captureImageBtnClicked();
-            } else if (currKey == KeyCode.TAB) { // Capture Photo
-                backtrackBtnClicked();
-            } else if (currKey == KeyCode.ESCAPE) { // Exits the system
-            else if (currKey == KeyCode.ESCAPE) { // Exits the program
-                    System.out.println("System: Closing the application");
-                    System.exit(0);
+            if (currKey != lastKey) {
+                lastKey = currKey;
+                if (currKey == KeyCode.W) { // UP
+                    keyPressedSystemTime = System.currentTimeMillis();
+                } else if (currKey == KeyCode.D) { // RIGHT
+                    keyPressedSystemTime = System.currentTimeMillis();
+                } else if (currKey == KeyCode.A) { // LEFT
+                    keyPressedSystemTime = System.currentTimeMillis();
+                } else if (currKey == KeyCode.S) { // DOWN/BACK
+                    keyPressedSystemTime = System.currentTimeMillis();
+                } else if (currKey == KeyCode.SPACE) { // Stop/Space
+                    keyPressedSystemTime = System.currentTimeMillis();
+                } else if (currKey == KeyCode.E) { // Capture Photo
+                    captureImageBtnClicked();
+                } else if (currKey == KeyCode.TAB) { // Capture Photo
+                    backtrackBtnClicked();
+                } else if (currKey == KeyCode.ESCAPE) { // Exits the program
+                        System.out.println("System: Closing the application");
+                        System.exit(0);
                 } else if (currKey == KeyCode.T) { // Starts auto traceback
-                    traceBackBtnClicked();
+                        traceBackBtnClicked();
                 }
             }
         }
@@ -367,7 +363,7 @@ public class NavigationPanelController extends Thread {
             RTH_Controller.traceBackController();
         }
     }
-}
+
 
 
 //class Weather_battey_Thread extends Thread {

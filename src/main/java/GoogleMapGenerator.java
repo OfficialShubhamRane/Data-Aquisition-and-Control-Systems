@@ -15,14 +15,11 @@ public class GoogleMapGenerator {
 
         try{
 
-<<<<<<< HEAD
-            String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
-            String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
+//            String latitude = LocalMapGenerator.latitudeGetter( LocalMapGenerator.publicIP_Finder() );
+//            String longitude = LocalMapGenerator.longitudeGetter( LocalMapGenerator.publicIP_Finder() );
 
-=======
             String latitude = LocalMapGenerator.latitudeGetter( NavigationPanelController.public_IP );
             String longitude = LocalMapGenerator.longitudeGetter( NavigationPanelController.public_IP );
->>>>>>> dev_1
             urlForMap  = new URL("https://maps.googleapis.com/maps/api/staticmap?center="+ latitude +","+ longitude +"&zoom=19&size=883x904&maptype=satellite&key="
                     + Constants.googleMapAPI_key);
 
