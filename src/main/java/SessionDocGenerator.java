@@ -10,16 +10,18 @@ public class SessionDocGenerator {
     /** Create file in suitable format to store meta-data and logs of machine */
 
     /** Name file with "System Time + MachineID" or any suitable key*/
+    static File sessionFolderName;
+    static String systemDateTime;
     public static void directoryGenerator(){
 
         Date date = new Date();
         SimpleDateFormat DateFor = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-        String stringDate = DateFor.format(date);
-        System.out.println("Date Format with dd-M-yyyy hh:mm:ss : "+ stringDate);
-
-
-        File sessionFile = new File("src/SessionData/"+ stringDate);
-        boolean isfileCreated = sessionFile.mkdir();
+        systemDateTime = DateFor.format(date);
+        systemDateTime = systemDateTime.replaceAll("\\s", "");
+        systemDateTime = systemDateTime.replaceAll(":", "");
+        
+        sessionFolderName = new File("src/SessionData/"+ systemDateTime);
+        boolean isfileCreated = sessionFolderName.mkdir();
         if (isfileCreated) {
             System.out.println("System: Successfully created new directory for session data");
         }else{

@@ -25,10 +25,9 @@ public class RTH_Controller {
 
     public static void traceBackController() throws IOException {
 
-        NavigationPanelController navigationPanelControllerObj = new NavigationPanelController();
         String direction = "Forward";
         long expectedEAT  = 0;
-
+        System.out.println("System: Initializing auto traceback...");
         while (!traceBackStack.empty()) {
             String currPath = traceBackStack.pop();
 
@@ -56,7 +55,7 @@ public class RTH_Controller {
             new MapBlender().combineHeatmapWithGoogleMap();
         }
 
-        System.out.println("Location: Auto-traceback initiated - EAT is " + expectedEAT + " seconds.");
+        System.out.println("Location: Auto-traceback in progress - EAT is in " + expectedEAT + " seconds.");
 
 
     }

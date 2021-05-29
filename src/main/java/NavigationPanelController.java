@@ -57,7 +57,7 @@ public class NavigationPanelController extends Thread {
 
         /** fetch and set public IP of the system */
         LocalMapGenerator.publicIP_Finder();
-        System.out.println( "System: Public IP: " + public_IP );
+//        System.out.println( "System: Public IP: " + public_IP );
 
 
         /** Calling thread to periodically check on weather in every 1 minutes */
@@ -86,7 +86,7 @@ public class NavigationPanelController extends Thread {
                 /** Gets Latitude and Longitude */
                 String latitude = LocalMapGenerator.latitudeGetter( NavigationPanelController.public_IP );
                 String longitude = LocalMapGenerator.longitudeGetter( NavigationPanelController.public_IP );
-                System.out.println("Latitude: " + latitude + "Longitude: " + longitude);
+//                System.out.println("Latitude: " + latitude + "Longitude: " + longitude);
 
                 /** Call Weather api for weather data */
                 String currentWeather = LocalMapGenerator.getWeatherData(latitude, longitude);
