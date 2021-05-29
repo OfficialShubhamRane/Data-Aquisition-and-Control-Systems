@@ -7,20 +7,20 @@ import java.net.*;
 public class LocalMapGenerator {
 
     /** Retrieves public IP address of machine */
-    public static String publicIP_Finder() {
+    public static void publicIP_Finder() {
 
-        String public_IP;
         try
         {
             URL url_name = new URL("http://bot.whatismyipaddress.com");
             BufferedReader sc = new BufferedReader(new InputStreamReader( url_name.openStream() ) );
-            public_IP = sc.readLine().trim();
+
+            NavigationPanelController.public_IP = sc.readLine().trim();
         }
         catch (Exception e)
         {
-            public_IP = "Cannot Execute Properly";
+            System.out.println("Location: Cannot fetch public IP of the system");
         }
-        return public_IP;
+
     }
 
     /** Fetches Latitude of the machine */
@@ -49,7 +49,11 @@ public class LocalMapGenerator {
             reader.close();
 
         }catch( Exception e){
+<<<<<<< HEAD
             System.out.println("Error: 429, IPAPI not replying");
+=======
+//            System.out.println("Location: Error: 429, IPAPI not replying");
+>>>>>>> dev_1
         }
         return line;
     }
@@ -61,8 +65,14 @@ public class LocalMapGenerator {
                 "&exclude=daily,minutely,hourly" +
                 "&appid=" + Constants.weatherAPI_key);
 
+//        System.out.println(" ######## Testing weather URL IN Working ######## ");
+//        URL testUrlForWeather = new URL(Constants.testWeatherAPI);
+//        String weatherJson = weatherJsonValueRetriever(testUrlForWeather);
+
         String weatherJson = weatherJsonValueRetriever(urlForWeather);
+//        System.out.println("weatherJson: " + weatherJson);
         String mainWeather = dominantWeatherFinder( weatherJson );
+//        System.out.println("mainWeather: " + mainWeather);
         return mainWeather;
     }
 
@@ -78,7 +88,7 @@ public class LocalMapGenerator {
             }
             reader.close();
         }catch(Exception e){
-            System.out.println("Error: 400, No weather data without latitude longitude");
+            System.out.println("Location: Error 400, No weather data without latitude longitude");
         }
 
 
@@ -90,12 +100,14 @@ public class LocalMapGenerator {
 
         String weatherID = "-1";
         try{
-            int indexOfMain =  weatherJson.lastIndexOf("id");
-             weatherID = weatherJson.substring(indexOfMain+4, indexOfMain+7);
+            int indexOfMain =  weatherJson.indexOf("\"id\":");
+             weatherID = weatherJson.substring(indexOfMain+5, indexOfMain+8);
+//             System.out.println("indexOfMain :" + indexOfMain);
         }catch (Exception e){
-            System.out.println("Null error data");
+            System.out.println("Location: No weather data available");
         }
-
+//        System.out.println("Weather ID: " + weatherID);
+//        System.out.println("weather id length: " + weatherID.length());
         return Constants.getWeatherReport(weatherID);
 
     }

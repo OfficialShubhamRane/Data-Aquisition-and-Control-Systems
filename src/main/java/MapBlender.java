@@ -22,7 +22,6 @@ public class MapBlender {
         /** This method generates result image in dst matrix */
         Core.addWeighted( src1, alpha, src2, beta, 0.0, dst);
         Imgcodecs.imwrite(Constants.blendedHeatMap,dst);
-
     }
 
 }

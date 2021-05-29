@@ -1,4 +1,4 @@
-public class LocationBasedProcessor {
+public class  LocationBasedProcessor {
 
     /** Get Latitude and Longitude of  machine or laptop */
 

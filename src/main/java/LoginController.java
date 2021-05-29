@@ -40,7 +40,7 @@ public class LoginController {
         System.out.println("Loaded Login Screen");
         invalidUserLb_ID.setVisible(false);
         loginDAOObj = new LoginDAO();
-//        notificationObject = new NotificationsGenerator();
+        notificationObject = new NotificationsGenerator();
     }
 
     @FXML
@@ -56,6 +56,7 @@ public class LoginController {
 
         /**  Notification  as a feedback for uesr authentification */
 //        notificationObject.loginNotification(isValidUser);
+//        notificationObject.alertBox();
 
         /** If user is valid then load the next window */
         if(isValidUser){

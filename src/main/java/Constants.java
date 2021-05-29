@@ -3,29 +3,24 @@ import java.util.Map;
 
 public class Constants {
 
-    final public static String weatherAPI_key = "4a35f0f50ffdfc2aaa5966bbcec3f638";
-    final public static String googleMapAPI_key = "AIzaSyDwFYHpPzpWqrWIZa5R-KL3QYlQQTmSKqs";
-
     final public static String URL = "jdbc:mysql://127.0.0.1:3306/java_projects_schema?autoreconnect=true";
     final public static String USERNAME = "root";
     final public static String PASSWORD = "1234";
 
     final public static String frontalFaceCascadeDirectory = "src/main/resources/haarcascade_frontalface_alt.xml";
-    final public static String save_capturedPhotoDirectory = "src/SessionData/faceDetected_img";
-
-    final public static String save_heatMapDirectory = "src/SessionData/navigation-heatChart.png";
-    final public static String heatMapImage = "src/SessionData/navigation-heatChart.png";
-
-    // final public static String googleMapsImage = "src/main/resources/GoogleMaps_WashingtonPark.png";
     final public static String googleMapsImage = "src/main/resources/GoogleMaps.png";
-    final public static String blendedHeatMap = "src/SessionData/blendedNavHeatChart.png";
     // My perfect co-ordinates are: 40.75028544,-74.04422841
     final public static String congressStreetHardCoded_Link = "https://maps.googleapis.com/maps/api/staticmap?center=40.75028544,-74.04422841&zoom=19&size=883x904&maptype=satellite&key=";
 
-
+    /** Session data generators */
+    final public static String save_capturedPhotoDirectory = "src/SessionData/"+SessionDocGenerator.systemDateTime+"/faceDetected_img";
+    final public static String save_heatMapDirectory = "src/SessionData/"+SessionDocGenerator.systemDateTime+"/navigation-heatChart.png";
+    final public static String heatMapImage = "src/SessionData/"+SessionDocGenerator.systemDateTime+"/navigation-heatChart.png";
+    final public static String blendedHeatMap = "src/SessionData/"+SessionDocGenerator.systemDateTime+"/blendedNavHeatChart.png";
 
     /** Holds weather ID  and weather Description mapping */
-    public static String getWeatherReport(String weatherID){
+    final public static String testWeatherAPI = "https://api.openweathermap.org/data/2.5/onecall?lat=40.75028544&long=-74.04422841&unit=metric&exclude=daily,minutely,hourly&appid=4a35f0f50ffdfc2aaa5966bbcec3f638";
+    public static String getWeatherReport(String weatherID) {
 
         Map<String, String> weatherMap = new HashMap<>();
 
@@ -95,4 +90,7 @@ public class Constants {
 
         return weatherMap.get(weatherID);
     }
+
+    final public static String weatherAPI_key = "4a35f0f50ffdfc2aaa5966bbcec3f638";
+    final public static String googleMapAPI_key = "AIzaSyDwFYHpPzpWqrWIZa5R-KL3QYlQQTmSKqs";
 }
