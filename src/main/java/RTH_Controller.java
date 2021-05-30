@@ -26,7 +26,7 @@ public class RTH_Controller {
     public static void traceBackController() throws IOException {
 
         String direction = "Forward";
-        long expectedEAT  = 0;
+        long expectedETA  = 0;
         System.out.println("System: Initializing auto traceback...");
         while (!traceBackStack.empty()) {
             String currPath = traceBackStack.pop();
@@ -45,7 +45,7 @@ public class RTH_Controller {
             }
 
             long distance = Long.parseLong(currPath.substring(1));
-            expectedEAT += distance;
+            expectedETA += distance;
 
             /** Sending data to heatMapGenerator class after each key release*/
             HeatMapGenerator.heatChartGenerator(direction, distance);
@@ -55,7 +55,7 @@ public class RTH_Controller {
             new MapBlender().combineHeatmapWithGoogleMap();
         }
 
-        System.out.println("Location: Auto-traceback in progress - EAT is in " + expectedEAT + " seconds.");
+        System.out.println("Location: Auto-traceback in progress - ETA is in " + expectedETA + " seconds.");
 
 
     }
