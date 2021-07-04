@@ -10,7 +10,12 @@ Data Aquisition and Controls Systems:
     6. Session data persistance system
     7. monitoring battery life and area covered
 
-<<<<<<< HEAD
 This application is in journey towards being one stop shop as sophisticated controller for Data Aquisition and Control Robotics.
-=======
->>>>>>> dev_1
+
+https://github.com/OfficialShubhamRane/UnmannedVehicleController/blob/main/Demo%20%26%20Documents/Demo/Controller_empty.PNG
+
+https://github.com/OfficialShubhamRane/UnmannedVehicleController/blob/main/Demo%20%26%20Documents/Demo/Controller_filled.PNG
+
+https://github.com/OfficialShubhamRane/UnmannedVehicleController/blob/main/Demo%20%26%20Documents/Demo/blendedNavHeatChart.png
+
+https://github.com/OfficialShubhamRane/UnmannedVehicleController/blob/main/Demo%20%26%20Documents/Demo/faceDetected_img1.jpg
