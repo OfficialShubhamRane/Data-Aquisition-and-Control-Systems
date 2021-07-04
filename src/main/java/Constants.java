@@ -91,6 +91,6 @@ public class Constants {
         return weatherMap.get(weatherID);
     }
 
-    final public static String weatherAPI_key = "4a35bf0f50ffdfc2aaa5966bbcec3f638";
-        final public static String googleMapAPI_key = "AIzabSyDwFYHpPzpWqrWIZa5R-KL3QYlQQTmSKqs";
+    final public static String weatherAPI_key = "4a35f0f50ffdfc2aaa5966bbcec3f638";
+    final public static String googleMapAPI_key = "AIzaSyDwFYHpPzpWqrWIZa5R-KL3QYlQQTmSKqs";
 }
